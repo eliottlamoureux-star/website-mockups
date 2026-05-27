@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Taco & Chip Icon Picker</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background: #1a1a1a;
+    color: #f5f5f5;
+    padding: 40px 20px;
+    min-height: 100vh;
+  }
+  h1 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 8px;
+    color: #FC3845;
+  }
+  .subtitle {
+    text-align: center;
+    color: #aaa;
+    margin-bottom: 48px;
+    font-size: 0.95rem;
+  }
+  .section {
+    margin-bottom: 60px;
+  }
+  .section h2 {
+    font-size: 1.3rem;
+    margin-bottom: 24px;
+    padding-left: 8px;
+    border-left: 4px solid #EED03A;
+    color: #EED03A;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .card {
+    background: #2a2a2a;
+    border: 2px solid #333;
+    border-radius: 16px;
+    padding: 24px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+    position: relative;
+  }
+  .card:hover {
+    border-color: #FC3845;
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(252,56,69,0.25);
+  }
+  .card.selected {
+    border-color: #EED03A;
+    background: #2f2a1a;
+    box-shadow: 0 8px 24px rgba(238,208,58,0.3);
+  }
+  .card.selected::after {
+    content: '✓ Selected';
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: #EED03A;
+    color: #1a1a1a;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 20px;
+  }
+  .card img {
+    width: 160px;
+    height: 160px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto 16px;
+  }
+  .card-label {
+    font-size: 0.9rem;
+    color: #ccc;
+    margin-top: 4px;
+  }
+  .card-num {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #f5f5f5;
+  }
+  .actions {
+    text-align: center;
+    margin-top: 48px;
+  }
+  .apply-btn {
+    background: #FC3845;
+    color: white;
+    border: none;
+    padding: 16px 48px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.5px;
+  }
+  .apply-btn:hover {
+    background: #e02030;
+    transform: scale(1.04);
+  }
+  .apply-btn:disabled {
+    background: #555;
+    cursor: not-allowed;
+    transform: none;
+  }
+  .status {
+    margin-top: 20px;
+    color: #aaa;
+    font-size: 0.9rem;
+    min-height: 24px;
+  }
+  .status.success {
+    color: #5acd5a;
+    font-weight: 600;
+  }
+  .status.error {
+    color: #FC3845;
+  }
+  .selection-summary {
+    background: #222;
+    border: 1px solid #444;
+    border-radius: 12px;
+    padding: 20px 32px;
+    display: inline-block;
+    margin: 24px auto 0;
+    min-width: 280px;
+    text-align: left;
+  }
+  .selection-summary h3 {
+    font-size: 0.85rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+  }
+  .sel-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+    border-bottom: 1px solid #333;
+    font-size: 0.9rem;
+  }
+  .sel-item:last-child { border-bottom: none; }
+  .sel-item span:first-child { color: #aaa; }
+  .sel-item span:last-child { color: #EED03A; font-weight: 600; }
+  .sel-none { color: #666; font-style: italic; font-size: 0.85rem; }
+</style>
+</head>
+<body>
+
+<h1>🌮 Taco & Chip Picker</h1>
+<p class="subtitle">Click to select your taco and chip icons — then hit Apply to swap them in.</p>
+
+<div class="section">
+  <h2>🌮 Taco — pick one</h2>
+  <div class="grid">
+    <div class="card" data-type="taco" data-num="1" onclick="select(this)">
+      <img src="wp-content/uploads/2026/custom/taco-1.svg" alt="Taco 1">
+      <div class="card-num">Taco 1</div>
+      <div class="card-label">Classic side view — yellow shell, colourful fillings</div>
+    </div>
+    <div class="card" data-type="taco" data-num="2" onclick="select(this)">
+      <img src="wp-content/uploads/2026/custom/taco-2.svg" alt="Taco 2">
+      <div class="card-num">Taco 2</div>
+      <div class="card-label">3/4 angle — bold red shell, layered fillings</div>
+    </div>
+    <div class="card" data-type="taco" data-num="3" onclick="select(this)">
+      <img src="wp-content/uploads/2026/custom/taco-3.svg" alt="Taco 3">
+      <div class="card-num">Taco 3</div>
+      <div class="card-label">Top-down open flat taco — loaded with toppings</div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h2>🧀 Chips — pick one</h2>
+  <div class="grid">
+    <div class="card" data-type="chip" data-num="1" onclick="select(this)">
+      <img src="wp-content/uploads/2026/custom/chip-1.svg" alt="Chip 1">
+      <div class="card-num">Chip 1</div>
+      <div class="card-label">Single bold tortilla chip — yellow with salt</div>
+    </div>
+    <div class="card" data-type="chip" data-num="2" onclick="select(this)">
+      <img src="wp-content/uploads/2026/custom/chip-2.svg" alt="Chip 2">
+      <div class="card-num">Chip 2</div>
+      <div class="card-label">Stack of 3 chips — nacho pile</div>
+    </div>
+    <div class="card" data-type="chip" data-num="3" onclick="select(this)">
+      <img src="wp-content/uploads/2026/custom/chip-3.svg" alt="Chip 3">
+      <div class="card-num">Chip 3</div>
+      <div class="card-label">Chips bag — red bag with chips sticking out</div>
+    </div>
+  </div>
+</div>
+
+<div class="actions">
+  <div class="selection-summary">
+    <h3>Your selection</h3>
+    <div class="sel-item"><span>Taco icon</span> <span id="taco-sel-label" class="sel-none">not selected</span></div>
+    <div class="sel-item"><span>Chip icon</span> <span id="chip-sel-label" class="sel-none">not selected</span></div>
+  </div>
+  <br><br>
+  <button class="apply-btn" id="applyBtn" onclick="applySelection()" disabled>Apply to Site</button>
+  <div class="status" id="status"></div>
+</div>
+
+<script>
+const selected = { taco: null, chip: null };
+
+function select(card) {
+  const type = card.dataset.type;
+  const num = card.dataset.num;
+
+  // Deselect previous in same group
+  document.querySelectorAll(`.card[data-type="${type}"]`).forEach(c => c.classList.remove('selected'));
+  card.classList.add('selected');
+  selected[type] = num;
+
+  // Update summary
+  const label = card.querySelector('.card-num').textContent;
+  document.getElementById(`${type}-sel-label`).textContent = label;
+  document.getElementById(`${type}-sel-label`).classList.remove('sel-none');
+
+  // Enable button if both selected
+  document.getElementById('applyBtn').disabled = !(selected.taco && selected.chip);
+}
+
+async function applySelection() {
+  const btn = document.getElementById('applyBtn');
+  const status = document.getElementById('status');
+  btn.disabled = true;
+  status.textContent = 'Applying...';
+  status.className = 'status';
+
+  try {
+    const res = await fetch('/apply-icons', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ taco: selected.taco, chip: selected.chip })
+    });
+    if (res.ok) {
+      status.textContent = '✓ Icons applied! Refresh the main site to see your changes.';
+      status.className = 'status success';
+    } else {
+      throw new Error('Server error');
+    }
+  } catch(e) {
+    // Fallback: show manual instructions
+    status.innerHTML = `ℹ️ To apply manually, run in terminal:<br><code style="color:#EED03A">cp wp-content/uploads/2026/custom/taco-${selected.taco}.svg wp-content/uploads/2026/01/hamburger-icon.svg && cp wp-content/uploads/2026/custom/chip-${selected.chip}.svg wp-content/uploads/2026/01/frietje.svg</code>`;
+    status.className = 'status';
+    btn.disabled = false;
+  }
+}
+</script>
+</body>
+</html>

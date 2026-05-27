@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Character Preview</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #111;
+    font-family: system-ui, sans-serif;
+    padding: 40px 20px;
+    color: #fff;
+  }
+  h1 { text-align: center; font-size: 1.6rem; margin-bottom: 8px; color: #FC3845; }
+  .sub { text-align: center; color: #888; margin-bottom: 48px; font-size: 0.9rem; }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .card {
+    background: #1e1e1e;
+    border: 2px solid #333;
+    border-radius: 16px;
+    padding: 24px 16px;
+    text-align: center;
+    transition: border-color 0.2s;
+  }
+  .card:hover { border-color: #FC3845; }
+  .card img {
+    width: 100%;
+    max-width: 220px;
+    height: 240px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto 16px;
+    /* Show on dark bg but we want to see b&w on white */
+    background: white;
+    border-radius: 12px;
+    padding: 8px;
+  }
+  .card h2 { font-size: 1rem; color: #EED03A; margin-bottom: 4px; }
+  .card p { font-size: 0.8rem; color: #888; }
+  .bg-toggle {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+  .bg-toggle button {
+    background: #333;
+    border: 1px solid #555;
+    color: white;
+    padding: 8px 20px;
+    margin: 0 6px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.85rem;
+  }
+  .bg-toggle button.active { background: #FC3845; border-color: #FC3845; }
+  .white-bg img { background: white; }
+  .dark-bg img { background: #1a1a1a; }
+  .red-bg img { background: #6B1A1A; }
+</style>
+</head>
+<body>
+<h1>🌮 Character Preview</h1>
+<p class="sub">Black &amp; white retro cartoon characters — review before applying</p>
+
+<div class="bg-toggle">
+  <button class="active" onclick="setBg('white-bg')">White bg</button>
+  <button onclick="setBg('dark-bg')">Dark bg</button>
+  <button onclick="setBg('red-bg')">Red bg (site color)</button>
+</div>
+
+<div class="grid white-bg" id="grid">
+  <div class="card">
+    <img src="wp-content/uploads/2026/custom/char-taco2.svg" alt="Taco character">
+    <h2>Taco</h2>
+    <p>Jumping, arms up</p>
+  </div>
+  <div class="card">
+    <img src="wp-content/uploads/2026/custom/char-bottle.svg" alt="Bottle character">
+    <h2>Bottle</h2>
+    <p>Walking, finger up</p>
+  </div>
+  <div class="card">
+    <img src="wp-content/uploads/2026/custom/char-lemon.svg" alt="Lemon character">
+    <h2>Lemon</h2>
+    <p>Walking, waving</p>
+  </div>
+  <div class="card">
+    <img src="wp-content/uploads/2026/custom/char-cup.svg" alt="Cup character">
+    <h2>Coffee Cup</h2>
+    <p>Running, coffee splash</p>
+  </div>
+  <div class="card">
+    <img src="wp-content/uploads/2026/custom/char-avocado.svg" alt="Avocado character">
+    <h2>Avocado</h2>
+    <p>Lounging, thumbs up</p>
+  </div>
+  <div class="card">
+    <img src="wp-content/uploads/2026/custom/char-can.svg" alt="Can character">
+    <h2>Soda Can</h2>
+    <p>Skateboarding</p>
+  </div>
+</div>
+
+<script>
+function setBg(cls) {
+  const grid = document.getElementById('grid');
+  grid.className = 'grid ' + cls;
+  document.querySelectorAll('.bg-toggle button').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+}
+</script>
+</body>
+</html>
