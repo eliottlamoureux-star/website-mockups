@@ -289,12 +289,7 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
 .carousel-overflow{overflow:hidden;padding:40px 0 60px}
 .carousel-track{
   display:inline-flex;
-  animation:carousel-scroll 24s linear infinite;
-}
-.carousel-track:hover{animation-play-state:paused}
-@keyframes carousel-scroll{
-  0%{transform:translateX(0)}
-  100%{transform:translateX(-50%)}
+  will-change:transform;
 }
 .carousel-card{
   flex:0 0 320px;height:440px;
@@ -826,8 +821,8 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
       <div class="carousel-card"><img src="after1.jpg" alt="Après 1"><span class="carousel-card-label apres">Après</span><span class="carousel-card-type">Résidentiel</span></div>
       <div class="carousel-card"><img src="before2.jpg" alt="Avant 2"><span class="carousel-card-label">Avant</span><span class="carousel-card-type">Résidentiel</span></div>
       <div class="carousel-card"><img src="after2.jpg" alt="Après 2"><span class="carousel-card-label apres">Après</span><span class="carousel-card-type">Résidentiel</span></div>
-      <div class="carousel-card"><img src="before3.jpg" alt="Après 3"><span class="carousel-card-label apres">Après</span><span class="carousel-card-type">Commercial</span></div>
       <div class="carousel-card"><img src="after3.jpg" alt="Avant 3"><span class="carousel-card-label">Avant</span><span class="carousel-card-type">Commercial</span></div>
+      <div class="carousel-card"><img src="before3.jpg" alt="Après 3"><span class="carousel-card-label apres">Après</span><span class="carousel-card-type">Commercial</span></div>
       <div class="carousel-card"><img src="before4.jpg" alt="Avant 4"><span class="carousel-card-label">Avant</span><span class="carousel-card-type">Résidentiel</span></div>
       <div class="carousel-card"><img src="after4.jpg" alt="Après 4"><span class="carousel-card-label apres">Après</span><span class="carousel-card-type">Résidentiel</span></div>
       <!-- Set 2 — duplicate for seamless loop -->
@@ -835,8 +830,8 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
       <div class="carousel-card"><img src="after1.jpg" alt="Après 1"><span class="carousel-card-label apres">Après</span><span class="carousel-card-type">Résidentiel</span></div>
       <div class="carousel-card"><img src="before2.jpg" alt="Avant 2"><span class="carousel-card-label">Avant</span><span class="carousel-card-type">Résidentiel</span></div>
       <div class="carousel-card"><img src="after2.jpg" alt="Après 2"><span class="carousel-card-label apres">Après</span><span class="carousel-card-type">Résidentiel</span></div>
-      <div class="carousel-card"><img src="before3.jpg" alt="Après 3"><span class="carousel-card-label apres">Après</span><span class="carousel-card-type">Commercial</span></div>
       <div class="carousel-card"><img src="after3.jpg" alt="Avant 3"><span class="carousel-card-label">Avant</span><span class="carousel-card-type">Commercial</span></div>
+      <div class="carousel-card"><img src="before3.jpg" alt="Après 3"><span class="carousel-card-label apres">Après</span><span class="carousel-card-type">Commercial</span></div>
       <div class="carousel-card"><img src="before4.jpg" alt="Avant 4"><span class="carousel-card-label">Avant</span><span class="carousel-card-type">Résidentiel</span></div>
       <div class="carousel-card"><img src="after4.jpg" alt="Après 4"><span class="carousel-card-label apres">Après</span><span class="carousel-card-type">Résidentiel</span></div>
     </div>
@@ -1001,6 +996,27 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
 </div>
 
 <script>
+// ── INFINITE CAROUSEL ──────────────────────────────────────
+(function(){
+  const track = document.querySelector('.carousel-track');
+  if (!track) return;
+  let pos = 0;
+  const speed = 0.6;
+  let paused = false;
+  track.addEventListener('mouseenter', () => paused = true);
+  track.addEventListener('mouseleave', () => paused = false);
+  function tick() {
+    if (!paused) {
+      pos -= speed;
+      const half = track.scrollWidth / 2;
+      if (pos <= -half) pos += half;
+      track.style.transform = `translateX(${pos}px)`;
+    }
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+})();
+
 // ── NAV THEME ──────────────────────────────────────────────
 const nav = document.getElementById('navbar');
 const themedSections = [...document.querySelectorAll('[data-nav-theme]')];
