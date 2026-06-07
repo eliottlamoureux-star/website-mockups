@@ -582,6 +582,7 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
   .footer-bottom{flex-direction:column;gap:16px;text-align:center}
   .footer-legal{justify-content:center}
   #char-editor{display:none}
+  #plant-editor{display:none}
 }
 </style>
 </head>
@@ -1017,7 +1018,7 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
     </div>
     <div class="ctrl-block">
       <div class="ctrl-label">Rotation <span id="rot-val">0°</span></div>
-      <input type="range" class="ctrl-slider" id="ctrl-rot" min="0" max="360" value="0">
+      <input type="range" class="ctrl-slider" id="ctrl-rot" min="-180" max="180" value="0">
     </div>
     <div class="ctrl-btns">
       <button class="ctrl-btn" id="ctrl-vis">Afficher</button>
