@@ -915,6 +915,9 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
   <div class="plant-el" data-plant-id="1" style="width:200px;left:100px;top:200px;opacity:0;pointer-events:none">
     <img src="plants/plant2.svg" draggable="false">
   </div>
+  <div class="plant-el" data-plant-id="2" style="width:200px;left:100px;top:200px;opacity:0;pointer-events:none">
+    <img src="plants/plant3.svg" draggable="false">
+  </div>
 </div>
 
 <!-- ── PLANT EDITOR ── -->
@@ -927,6 +930,7 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
     <div class="plant-tabs">
       <button class="plant-tab active" data-plant="0">P1</button>
       <button class="plant-tab" data-plant="1">P2</button>
+      <button class="plant-tab" data-plant="2">P3</button>
     </div>
     <div class="ctrl-block">
       <div class="ctrl-label">Taille <span id="plant-size-val">200px</span></div>
@@ -1194,7 +1198,7 @@ const plantRotVal     = document.getElementById('plant-rot-val');
 const plantVisBtn     = document.getElementById('plant-ctrl-vis');
 const plantLockBtn    = document.getElementById('plant-ctrl-lock');
 
-const PLANT_KEY = 'mdlm-plants-v3';
+const PLANT_KEY = 'mdlm-plants-v4';
 function savePlants(){ localStorage.setItem(PLANT_KEY, JSON.stringify(plantState)); }
 function loadPlants(){
   try {
