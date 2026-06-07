@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<title>Main dans la main Entretien — Laval</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Boogaloo&family=Anton&family=DM+Mono:ital,wght@0,400;0,500;1,500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+
+/* ── NAV — fully transparent ── */
+.nav{
+  position:fixed;top:0;left:0;width:100%;z-index:999;
+  padding:18px 40px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:transparent;
+  transition:color 0.3s, border-color 0.3s;
+}
+
+/* ── Nav left ── */
+.nav-left{
+  font-family:'DM Mono',monospace;font-size:12px;
+  color:rgba(255,255,255,0.9);
+  transition:color 0.3s;
+  display:flex;align-items:center;gap:10px;
+}
+.nav-logo{
+  height:90px;width:auto;
+  filter:brightness(0) invert(1);
+  transition:filter 0.3s;
+}
+
+/* ── Nav center pill ── */
+.nav-center{
+  position:absolute;left:50%;transform:translateX(-50%);
+  display:flex;align-items:center;gap:0;
+  background:rgba(255,255,255,0.12);
+  border:1px solid rgba(255,255,255,0.22);
+  border-radius:100px;padding:6px 18px;
+  backdrop-filter:blur(8px);
+  transition:background 0.3s, border-color 0.3s;
+  white-space:nowrap;
+}
+.nav-center a{
+  font-family:'DM Mono',monospace;font-size:12px;color:rgba(255,255,255,0.85);
+  text-decoration:none;padding:0 12px;transition:color 0.2s;
+}
+.nav-center a:hover{color:#fff}
+.nav-center .sep{color:rgba(255,255,255,0.3);font-size:11px;transition:color 0.3s}
+
+/* ── Nav right ── */
+.nav-right{display:flex;align-items:center;gap:14px}
+.nav-label{font-family:'DM Mono',monospace;font-size:12px;color:rgba(255,255,255,0.6);transition:color 0.3s}
+.nav-cta{
+  font-family:'DM Mono',monospace;font-size:12px;font-weight:500;
+  background:rgba(247,240,228,0.95);color:#1E211E;text-decoration:none;
+  padding:8px 18px;border-radius:100px;
+  transition:background 0.2s,transform 0.2s;
+}
+.nav-cta:hover{background:#fff;transform:scale(1.02)}
+
+/* ── Nav ON LIGHT sections (cream bg) ── */
+.nav--light .nav-left{color:#1E211E}
+.nav--light .nav-logo{filter:brightness(0)}
+.nav--light .nav-center{background:rgba(30,33,30,0.06);border-color:rgba(30,33,30,0.15)}
+.nav--light .nav-center a{color:rgba(30,33,30,0.7)}
+.nav--light .nav-center a:hover{color:#1E211E}
+.nav--light .nav-center .sep{color:rgba(30,33,30,0.25)}
+.nav--light .nav-label{color:rgba(30,33,30,0.5)}
+.nav--light .nav-cta{background:#1E211E;color:#F7F0E4}
+.nav--light .nav-cta:hover{background:#3A3E3A}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;
+  background:#7A9B6A;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+  padding:120px 20px 80px;
+}
+.hero-display{
+  font-family:'Boogaloo',cursive;
+  font-size:clamp(80px,14vw,200px);
+  color:#fff;
+  line-height:0.88;
+  text-align:center;
+  letter-spacing:-0.01em;
+  position:relative;z-index:2;
+  padding:0 20px;
+  text-shadow:0 4px 0 rgba(0,0,0,0.1);
+}
+.hero-display span{display:block}
+
+/* ── BONJOUR SECTION ── */
+.s-dark{
+  background:#1E211E;
+  min-height:100vh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+}
+.giant-text{
+  font-family:'Boogaloo',cursive;
+  font-size:clamp(100px,20vw,280px);
+  color:#fff;line-height:0.85;
+  text-align:center;letter-spacing:-0.02em;
+  position:relative;z-index:2;
+}
+.giant-sub{
+  font-family:'DM Mono',monospace;font-size:22px;
+  color:rgba(255,255,255,0.5);text-align:center;
+  max-width:900px;line-height:1.75;margin-top:32px;
+  position:relative;z-index:2;padding:0 24px;
+}
+
+/* ── SERVICE SECTIONS ── */
+.s-service{
+  min-height:100vh;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;overflow:hidden;
+  padding:80px 64px;
+  gap:48px;
+}
+.s-service.reverse{flex-direction:row-reverse}
+
+.s-blue{background:#C4897A}
+.s-yellow{background:#F7F0E4}
+.s-rose{background:#7A9B6A}
+.s-green{background:#C4897A}
+
+.service-photo{
+  flex:0 0 auto;width:45%;
+  display:flex;align-items:center;justify-content:center;
+}
+.service-photo img{
+  width:100%;max-width:460px;
+  border-radius:20px;object-fit:cover;
+  height:520px;
+  box-shadow:0 12px 40px rgba(30,33,30,0.12);
+}
+
+/* THE CARD */
+.ritual-card{
+  flex:0 0 auto;width:48%;max-width:560px;
+  border-radius:16px;overflow:hidden;
+  box-shadow:0 24px 64px rgba(0,0,0,0.18);
+}
+.card-header{
+  background:#1E211E;
+  padding:14px 22px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.card-header-left{display:flex;align-items:center;gap:10px}
+.card-num{
+  font-family:'Space Mono',monospace;font-size:13px;font-weight:700;
+  color:#C4897A;letter-spacing:0.05em;
+}
+.card-tag{
+  font-family:'DM Mono',monospace;font-size:11px;
+  color:rgba(255,255,255,0.5);letter-spacing:0.06em;
+}
+.card-icon{
+  width:32px;height:32px;border-radius:8px;
+  border:1px solid rgba(255,255,255,0.15);
+  display:flex;align-items:center;justify-content:center;
+}
+.card-icon svg{display:block}
+.card-body{background:#FFFFFF;padding:28px 28px 32px}
+.card-title{
+  font-family:'Anton',sans-serif;
+  font-size:clamp(48px,7vw,88px);
+  line-height:0.88;letter-spacing:-0.01em;
+  color:#1E211E;margin-bottom:18px;
+}
+.card-desc{
+  font-family:'DM Mono',monospace;font-size:12px;
+  color:rgba(26,26,26,0.65);line-height:1.8;
+  margin-bottom:22px;max-width:440px;
+}
+.card-items{display:flex;flex-direction:column;gap:2px}
+.card-item{
+  display:flex;align-items:flex-start;gap:12px;
+  padding:12px 14px;border:1px solid rgba(30,33,30,0.07);
+  border-radius:10px;background:#F7F0E4;
+}
+.card-item+.card-item{margin-top:6px}
+.item-star{
+  width:34px;height:34px;flex-shrink:0;
+  background:#C4897A;border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-size:14px;margin-top:1px;
+}
+.item-title{
+  font-family:'DM Mono',monospace;font-size:12px;font-weight:500;
+  color:#1E211E;display:block;margin-bottom:2px;
+}
+.item-desc{
+  font-family:'DM Mono',monospace;font-size:11px;
+  color:rgba(26,26,26,0.5);line-height:1.55;
+}
+
+/* ── TEAM SECTION ── */
+.s-team{
+  background:#1E211E;
+  min-height:100vh;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:80px 64px;text-align:center;
+  position:relative;overflow:hidden;
+}
+.team-eyebrow{
+  font-family:'DM Mono',monospace;font-size:11px;font-weight:500;
+  color:rgba(255,255,255,0.4);letter-spacing:0.12em;text-transform:uppercase;
+  margin-bottom:16px;
+}
+.team-title{
+  font-family:'Boogaloo',cursive;
+  font-size:clamp(60px,10vw,140px);
+  color:#fff;line-height:0.88;letter-spacing:-0.01em;
+  margin-bottom:48px;
+}
+.team-browser{
+  border-radius:16px;overflow:hidden;
+  box-shadow:0 32px 80px rgba(0,0,0,0.5);
+  max-width:680px;width:100%;
+}
+.browser-bar{background:#2a2a2a;padding:12px 16px;display:flex;align-items:center;gap:8px}
+.browser-dot{width:12px;height:12px;border-radius:50%}
+.browser-dot:nth-child(1){background:#FF5F57}
+.browser-dot:nth-child(2){background:#FFBD2E}
+.browser-dot:nth-child(3){background:#28C840}
+.browser-content img{width:100%;display:block;height:420px;object-fit:cover;object-position:top}
+.team-photo-full{width:100%;margin-bottom:40px}
+.team-photo-full img{width:100%;height:auto;object-fit:contain;border-radius:16px}
+.team-values{display:flex;gap:32px;margin-top:0;flex-wrap:wrap;justify-content:center}
+.team-value{
+  font-family:'DM Mono',monospace;font-size:12px;
+  color:rgba(255,255,255,0.4);letter-spacing:0.08em;text-transform:uppercase;
+  display:flex;align-items:center;gap:8px;
+}
+.team-value::before{content:'✦';color:#C4897A;font-size:14px}
+
+/* ── CONTACT SECTION ── */
+.s-contact{
+  background:#F7F0E4;
+  min-height:100vh;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:80px 64px;
+}
+.contact-heading{
+  font-family:'Boogaloo',cursive;
+  font-size:clamp(60px,10vw,140px);
+  color:#1E211E;line-height:0.88;letter-spacing:-0.01em;
+  text-align:center;margin-bottom:56px;opacity:0.85;
+}
+.contact-card-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;max-width:800px;width:100%}
+.contact-card{background:#1E211E;border-radius:16px;padding:28px 32px}
+.contact-card-label{
+  font-family:'DM Mono',monospace;font-size:10px;font-weight:500;
+  color:rgba(247,240,228,0.45);letter-spacing:0.1em;text-transform:uppercase;
+  margin-bottom:10px;display:block;
+}
+.contact-card-value{font-family:'Space Mono',monospace;font-size:16px;font-weight:700;color:#F7F0E4;line-height:1.4}
+.contact-card.wide{grid-column:1/-1}
+.calendly-wrap{
+  grid-column:1/-1;
+  display:flex;flex-direction:column;align-items:center;
+  padding:48px 32px;gap:24px;
+}
+.calendly-sub{
+  font-family:'DM Mono',monospace;font-size:14px;
+  color:rgba(30,33,30,0.55);text-align:center;line-height:1.7;
+}
+.calendly-btn{
+  display:inline-block;
+  padding:18px 48px;
+  background:#1E211E;color:#F7F0E4;
+  font-family:'Space Mono',monospace;font-size:13px;font-weight:700;
+  letter-spacing:0.06em;text-transform:uppercase;text-decoration:none;
+  border-radius:100px;transition:all 0.2s;
+}
+.calendly-btn:hover{background:#7A9B6A;transform:translateY(-2px);box-shadow:0 8px 32px rgba(122,155,106,0.3)}
+
+/* ── CTA SECTION ── */
+.s-cta{
+  background:#7A9B6A;
+  display:flex;flex-direction:column;align-items:center;
+  position:relative;overflow:hidden;padding:80px 40px 40px;
+}
+.cta-display{
+  font-family:'Boogaloo',cursive;
+  font-size:clamp(80px,16vw,220px);
+  color:#fff;line-height:0.85;text-align:center;letter-spacing:-0.01em;
+  text-shadow:0 4px 0 rgba(0,0,0,0.1);position:relative;z-index:2;
+}
+.footer-grid{
+  display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:48px;
+  width:100%;max-width:1100px;padding-top:72px;
+  position:relative;z-index:2;
+  border-top:1px solid rgba(255,255,255,0.12);
+}
+.footer-col{display:flex;flex-direction:column;gap:10px}
+.footer-col:first-child{align-items:center;text-align:center}
+.footer-logo{height:90px;width:auto;filter:brightness(0) invert(1);margin-bottom:8px;align-self:center}
+.footer-tagline{
+  font-family:'DM Mono',monospace;font-size:12px;
+  color:rgba(255,255,255,0.45);line-height:1.7;
+}
+.footer-col-label{
+  font-family:'DM Mono',monospace;font-size:10px;font-weight:500;
+  color:rgba(255,255,255,0.35);letter-spacing:0.12em;text-transform:uppercase;
+  margin-bottom:4px;
+}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.footer-col ul li a,.footer-col a{
+  font-family:'DM Mono',monospace;font-size:12px;
+  color:rgba(255,255,255,0.65);text-decoration:none;
+  transition:color 0.2s;
+}
+.footer-col ul li a:hover,.footer-col a:hover{color:#fff}
+.footer-col p{
+  font-family:'DM Mono',monospace;font-size:12px;
+  color:rgba(255,255,255,0.45);line-height:1.7;margin-top:2px;
+}
+.footer-bottom{
+  width:100%;max-width:1100px;
+  display:flex;justify-content:space-between;align-items:center;
+  padding-top:32px;margin-top:48px;
+  border-top:1px solid rgba(255,255,255,0.08);
+  position:relative;z-index:2;padding-bottom:16px;
+}
+.footer-bottom span{
+  font-family:'DM Mono',monospace;font-size:11px;
+  color:rgba(255,255,255,0.3);
+}
+.footer-legal{display:flex;gap:24px}
+.footer-legal a{
+  font-family:'DM Mono',monospace;font-size:11px;
+  color:rgba(255,255,255,0.3);text-decoration:none;transition:color 0.2s;
+}
+.footer-legal a:hover{color:rgba(255,255,255,0.7)}
+.footer-credit{
+  font-family:'Anton',sans-serif;font-size:13px;letter-spacing:0.1em;
+  color:rgba(255,255,255,0.3);text-transform:uppercase;
+  display:flex;align-items:center;gap:6px;
+}
+.footer-credit .heart{color:#c0392b}
+.footer-credit a{display:inline-flex;align-items:center;text-decoration:none;transition:opacity 0.2s}
+.footer-credit a:hover{opacity:0.7}
+.footer-credit .studio-logo-img{height:50px;width:auto;filter:brightness(0) invert(1);opacity:0.35;transition:opacity 0.2s}
+.footer-credit a:hover .studio-logo-img{opacity:0.7}
+
+/* ── ANIMATIONS ── */
+.fade-up{opacity:0;transform:translateY(32px);transition:opacity 0.7s ease,transform 0.7s ease}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+
+/* ── CHARACTER LAYER ── */
+#char-layer{position:absolute;top:0;left:0;width:100%;pointer-events:none;z-index:500}
+.char-el{
+  position:absolute;
+  cursor:grab;
+  pointer-events:all;
+  user-select:none;
+  transform-origin:center center;
+  transition:opacity 0.2s;
+}
+.char-el:active{cursor:grabbing}
+.char-el.locked{cursor:default}
+.char-el img{width:100%;height:auto;display:block;pointer-events:none}
+.char-el .char-handle{
+  position:absolute;top:-6px;right:-6px;
+  width:14px;height:14px;background:#C4897A;border-radius:50%;
+  cursor:pointer;display:none;
+}
+.char-el:hover .char-handle{display:block}
+
+/* ── CHARACTER EDITOR PANEL ── */
+#char-editor{
+  position:fixed;bottom:24px;right:24px;
+  z-index:1000;
+  background:#1E211E;
+  border:1px solid rgba(247,240,228,0.12);
+  border-radius:16px;
+  width:240px;
+  box-shadow:0 16px 48px rgba(0,0,0,0.4);
+  font-family:'DM Mono',monospace;
+  overflow:hidden;
+}
+#char-editor-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:12px 16px;
+  background:rgba(247,240,228,0.05);
+  border-bottom:1px solid rgba(247,240,228,0.08);
+  cursor:move;
+}
+#char-editor-title{font-size:11px;font-weight:500;color:#F7F0E4;letter-spacing:0.08em;text-transform:uppercase}
+#char-editor-collapse{
+  background:none;border:none;color:rgba(247,240,228,0.5);cursor:pointer;
+  font-size:16px;line-height:1;padding:0 2px;
+}
+#char-editor-body{padding:14px}
+.char-tabs{display:flex;gap:4px;margin-bottom:12px;flex-wrap:wrap}
+.char-tab{
+  flex:1;min-width:28px;padding:5px 0;
+  background:rgba(247,240,228,0.06);border:1px solid rgba(247,240,228,0.1);
+  border-radius:6px;font-family:'DM Mono',monospace;font-size:11px;
+  color:rgba(247,240,228,0.55);cursor:pointer;transition:all 0.15s;
+}
+.char-tab.active{background:#C4897A;border-color:#C4897A;color:#fff}
+.char-tab:hover:not(.active){background:rgba(247,240,228,0.1)}
+.ctrl-block{margin-bottom:10px}
+.ctrl-label{
+  font-size:10px;color:rgba(247,240,228,0.4);letter-spacing:0.08em;text-transform:uppercase;
+  display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;
+}
+.ctrl-label span{color:rgba(247,240,228,0.7);font-size:11px;letter-spacing:0}
+.ctrl-slider{
+  width:100%;-webkit-appearance:none;appearance:none;
+  height:3px;border-radius:2px;background:rgba(247,240,228,0.12);outline:none;
+}
+.ctrl-slider::-webkit-slider-thumb{
+  -webkit-appearance:none;width:14px;height:14px;border-radius:50%;
+  background:#C4897A;cursor:pointer;border:none;
+}
+.ctrl-btns{display:flex;gap:6px;margin-top:12px}
+.ctrl-btn{
+  flex:1;padding:7px 0;border-radius:8px;border:1px solid rgba(247,240,228,0.12);
+  background:rgba(247,240,228,0.05);font-family:'DM Mono',monospace;font-size:10px;
+  color:rgba(247,240,228,0.7);cursor:pointer;transition:all 0.15s;letter-spacing:0.04em;
+}
+.ctrl-btn:hover{background:rgba(247,240,228,0.1);color:#F7F0E4}
+.ctrl-btn.active{background:#7A9B6A;border-color:#7A9B6A;color:#fff}
+
+/* ── MOBILE ── */
+@media(max-width:900px){
+  .nav{padding:14px 20px}
+  .nav-center{display:none}
+  .hero-display{font-size:clamp(56px,16vw,120px)}
+  .hero-photo-wrap{width:320px}
+  .s-service{flex-direction:column!important;padding:80px 24px 48px;justify-content:center;gap:32px}
+  .service-photo,.ritual-card{width:100%;max-width:100%}
+  .service-photo img{height:280px}
+  .card-title{font-size:clamp(42px,12vw,72px)}
+  .giant-text{font-size:clamp(72px,22vw,160px)}
+  .team-title{font-size:clamp(48px,14vw,100px)}
+  .contact-card-grid{grid-template-columns:1fr}
+  .contact-card.wide{grid-column:1}
+  .form-row{grid-template-columns:1fr}
+  .s-contact,.s-team,.s-cta{padding:80px 24px}
+  .cta-display{font-size:clamp(56px,16vw,120px)}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:32px}
+  .footer-bottom{flex-direction:column;gap:16px;text-align:center}
+  .footer-legal{justify-content:center}
+  #char-editor{display:none}
+}
+</style>
+</head>
+<body>
+<!-- NAV -->
+<nav class="nav" id="navbar">
+  <div class="nav-left">
+    <img src="mdlm-logo.svg" alt="MDLM logo" class="nav-logo">
+  </div>
+  <div class="nav-center">
+    <a href="#bonjour">bonjour!</a>
+    <span class="sep">·</span>
+    <a href="#services">services</a>
+    <span class="sep">·</span>
+    <a href="#equipe">équipe</a>
+    <span class="sep">·</span>
+    <a href="#contact">contact</a>
+  </div>
+  <div class="nav-right">
+    <span class="nav-label">Laval · 24h/7j</span>
+    <a href="#contact" class="nav-cta">Devis gratuit</a>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero" data-nav-theme="dark">
+  <div class="hero-display">
+    <span>MAIN DANS</span>
+    <span>LA MAIN</span>
+    <span>ENTRETIEN</span>
+  </div>
+</section>
+
+<!-- ── BONJOUR ── -->
+<section class="s-dark" id="bonjour" data-nav-theme="dark">
+  <div class="giant-text fade-up">BONJOUR!</div>
+  <p class="giant-sub fade-up">
+    Main dans la main Entretien, c'est une équipe de Laval fondée sur trois valeurs simples : la confiance, la minutie et le respect. On se déplace chez vous — résidentiel ou commercial.
+  </p>
+</section>
+
+<!-- ── SERVICE 1 : RÉSIDENTIEL ── -->
+<section class="s-service s-blue" id="services" data-nav-theme="dark">
+  <div class="service-photo fade-up">
+    <img src="ill-residential.svg" alt="Ménage résidentiel">
+  </div>
+  <div class="ritual-card fade-up">
+    <div class="card-header">
+      <div class="card-header-left">
+        <span class="card-num">01</span>
+        <span class="card-tag">service</span>
+      </div>
+      <div class="card-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.65)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+          <polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>
+      </div>
+    </div>
+    <div class="card-body">
+      <h2 class="card-title">RÉSIDENTIEL</h2>
+      <p class="card-desc">on s'occupe de votre maison comme si c'était la nôtre. quotidien, hebdomadaire ou bi-mensuel — on s'adapte à votre rythme de vie, sans compromis sur la qualité.</p>
+      <div class="card-items">
+        <div class="card-item">
+          <div class="item-star">✦</div>
+          <div class="item-body">
+            <span class="item-title">ménage quotidien</span>
+            <span class="item-desc">on passe chaque jour, votre maison reste toujours impeccable</span>
+          </div>
+        </div>
+        <div class="card-item">
+          <div class="item-star">✦</div>
+          <div class="item-body">
+            <span class="item-title">ménage hebdomadaire</span>
+            <span class="item-desc">une fois par semaine, nettoyage complet de A à Z</span>
+          </div>
+        </div>
+        <div class="card-item">
+          <div class="item-star">✦</div>
+          <div class="item-body">
+            <span class="item-title">ménage bi-mensuel</span>
+            <span class="item-desc">deux fois par mois, pour garder l'équilibre sans surcoût</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SERVICE 2 : COMMERCIAL ── -->
+<section class="s-service reverse s-yellow" data-nav-theme="light">
+  <div class="service-photo fade-up">
+    <img src="ill-commercial.svg" alt="Ménage commercial">
+  </div>
+  <div class="ritual-card fade-up">
+    <div class="card-header">
+      <div class="card-header-left">
+        <span class="card-num">02</span>
+        <span class="card-tag">service</span>
+      </div>
+      <div class="card-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.65)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="7" width="20" height="15" rx="1"/>
+          <path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/>
+          <line x1="12" y1="12" x2="12" y2="16"/>
+          <line x1="10" y1="14" x2="14" y2="14"/>
+        </svg>
+      </div>
+    </div>
+    <div class="card-body">
+      <h2 class="card-title">COMMERCIAL</h2>
+      <p class="card-desc">bureaux, commerces, restaurants, espaces partagés. on s'adapte à vos horaires et vos exigences professionnelles — sans jamais interrompre vos opérations.</p>
+      <div class="card-items">
+        <div class="card-item">
+          <div class="item-star">✦</div>
+          <div class="item-body">
+            <span class="item-title">bureaux & espaces de travail</span>
+            <span class="item-desc">nettoyage avant ou après les heures de bureau</span>
+          </div>
+        </div>
+        <div class="card-item">
+          <div class="item-star">✦</div>
+          <div class="item-body">
+            <span class="item-title">commerces & restaurants</span>
+            <span class="item-desc">hygiène irréprochable pour vos clients et votre équipe</span>
+          </div>
+        </div>
+        <div class="card-item">
+          <div class="item-star">✦</div>
+          <div class="item-body">
+            <span class="item-title">espaces communs & partagés</span>
+            <span class="item-desc">halls, couloirs, salles de réunion — on gère tout</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SERVICE 3 : DÉMÉNAGEMENT ── -->
+<section class="s-service s-rose" data-nav-theme="dark">
+  <div class="service-photo fade-up">
+    <img src="ill-demenagement.svg" alt="Déménagement">
+  </div>
+  <div class="ritual-card fade-up">
+    <div class="card-header">
+      <div class="card-header-left">
+        <span class="card-num">03</span>
+        <span class="card-tag">service</span>
+      </div>
+      <div class="card-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.65)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/>
+          <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+          <line x1="12" y1="22.08" x2="12" y2="12"/>
+        </svg>
+      </div>
+    </div>
+    <div class="card-body">
+      <h2 class="card-title">DÉMÉNAGEMENT</h2>
+      <p class="card-desc">on s'occupe du nettoyage complet de votre logement avant l'entrée ou après votre départ. livré impeccable, prêt pour la remise des clés — sans stress.</p>
+      <div class="card-items">
+        <div class="card-item">
+          <div class="item-star">✦</div>
+          <div class="item-body">
+            <span class="item-title">avant l'entrée dans le logement</span>
+            <span class="item-desc">votre nouveau chez-vous, propre dès le premier jour</span>
+          </div>
+        </div>
+        <div class="card-item">
+          <div class="item-star">✦</div>
+          <div class="item-body">
+            <span class="item-title">après votre départ</span>
+            <span class="item-desc">remise des clés sans stress, dépôt de garantie protégé</span>
+          </div>
+        </div>
+        <div class="card-item">
+          <div class="item-star">✦</div>
+          <div class="item-body">
+            <span class="item-title">nettoyage plancher au plafond</span>
+            <span class="item-desc">chaque recoin, chaque surface — rien n'est laissé au hasard</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── TEAM ── -->
+<section class="s-team" id="equipe" data-nav-theme="dark">
+  <div class="team-eyebrow fade-up">notre équipe</div>
+  <div class="team-title fade-up">L'ÉQUIPE</div>
+  <div class="team-photo-full fade-up">
+    <img src="owners.png" alt="Samuel & équipe Main dans la main Entretien">
+  </div>
+  <div class="team-values fade-up">
+    <div class="team-value">Propreté</div>
+    <div class="team-value">Confiance</div>
+    <div class="team-value">Soin</div>
+    <div class="team-value">Laval, QC</div>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section class="s-contact" id="contact" data-nav-theme="light">
+  <div class="contact-heading fade-up">NOUS JOINDRE</div>
+  <div class="contact-card-grid">
+    <div class="contact-card fade-up">
+      <span class="contact-card-label">Téléphone</span>
+      <div class="contact-card-value">438-864-5176</div>
+    </div>
+    <div class="contact-card fade-up">
+      <span class="contact-card-label">Courriel</span>
+      <div class="contact-card-value">info@mdlmentretien.ca</div>
+    </div>
+    <div class="contact-card fade-up">
+      <span class="contact-card-label">Adresse</span>
+      <div class="contact-card-value">973 A rue Alfred-Laliberté<br>Laval H7E 2S2</div>
+    </div>
+    <div class="contact-card fade-up">
+      <span class="contact-card-label">Disponibilité</span>
+      <div class="contact-card-value">24h/24 · 7 jours sur 7</div>
+    </div>
+    <div class="calendly-wrap fade-up">
+      <p class="calendly-sub">Réservez votre consultation gratuite — on se déplace chez vous.</p>
+      <a href="https://calendly.com/mdlmentretien" target="_blank" class="calendly-btn">Choisir un créneau →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA / FOOTER ── -->
+<section class="s-cta" data-nav-theme="dark">
+  <div class="cta-display fade-up">À BIENTÔT!</div>
+  <div class="footer-grid fade-up">
+    <div class="footer-col">
+      <img src="mdlm-logo.svg" alt="MDLM" class="footer-logo">
+      <p class="footer-tagline">Confiance. Minutie. Respect.<br>Laval, QC — 24h/24 · 7j/7</p>
+    </div>
+    <div class="footer-col">
+      <span class="footer-col-label">Services</span>
+      <ul>
+        <li><a href="#services">Ménage résidentiel</a></li>
+        <li><a href="#services">Ménage commercial</a></li>
+        <li><a href="#services">Avant / après déménagement</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <span class="footer-col-label">Navigation</span>
+      <ul>
+        <li><a href="#bonjour">Bonjour!</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#equipe">Équipe</a></li>
+        <li><a href="#contact">Nous joindre</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <span class="footer-col-label">Contact</span>
+      <a href="tel:4388645176">438-864-5176</a>
+      <a href="mailto:info@mdlmentretien.ca">info@mdlmentretien.ca</a>
+      <p>973 A rue Alfred-Laliberté<br>Laval H7E 2S2</p>
+    </div>
+  </div>
+  <div class="footer-bottom fade-up">
+    <span>© 2026 Main dans la main Entretien — Tous droits réservés</span>
+    <span class="footer-credit">MADE WITH <span class="heart">♥</span> BY <a href="https://studio-montreal.ca" target="_blank" rel="noopener"><img src="studio-logo.svg" class="studio-logo-img" alt="Studio"></a></span>
+    <div class="footer-legal">
+      <a href="#">Politique de confidentialité</a>
+      <a href="#">Conditions d'utilisation</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── CHARACTER LAYER ── -->
+<div id="char-layer">
+  <div class="char-el" data-char-id="0" style="width:180px;left:80px;top:120px;opacity:0;pointer-events:none">
+    <img src="chars/char1.svg" draggable="false">
+  </div>
+  <div class="char-el" data-char-id="1" style="width:180px;left:80px;top:120px;opacity:0;pointer-events:none">
+    <img src="chars/char2.svg" draggable="false">
+  </div>
+  <div class="char-el" data-char-id="2" style="width:180px;left:80px;top:120px;opacity:0;pointer-events:none">
+    <img src="chars/char3.svg" draggable="false">
+  </div>
+  <div class="char-el" data-char-id="3" style="width:180px;left:80px;top:120px;opacity:0;pointer-events:none">
+    <img src="chars/char4.svg" draggable="false">
+  </div>
+  <div class="char-el" data-char-id="4" style="width:180px;left:80px;top:120px;opacity:0;pointer-events:none">
+    <img src="chars/char5.svg" draggable="false">
+  </div>
+  <div class="char-el" data-char-id="5" style="width:180px;left:80px;top:120px;opacity:0;pointer-events:none">
+    <img src="chars/char6.svg" draggable="false">
+  </div>
+</div>
+
+<!-- ── CHARACTER EDITOR ── -->
+<div id="char-editor">
+  <div id="char-editor-header">
+    <span id="char-editor-title">✦ Personnages</span>
+    <button id="char-editor-collapse">−</button>
+  </div>
+  <div id="char-editor-body">
+    <div class="char-tabs">
+      <button class="char-tab active" data-char="0">1</button>
+      <button class="char-tab" data-char="1">2</button>
+      <button class="char-tab" data-char="2">3</button>
+      <button class="char-tab" data-char="3">4</button>
+      <button class="char-tab" data-char="4">5</button>
+      <button class="char-tab" data-char="5">6</button>
+    </div>
+    <div class="ctrl-block">
+      <div class="ctrl-label">Taille <span id="size-val">180px</span></div>
+      <input type="range" class="ctrl-slider" id="ctrl-size" min="60" max="600" value="180">
+    </div>
+    <div class="ctrl-block">
+      <div class="ctrl-label">Rotation <span id="rot-val">0°</span></div>
+      <input type="range" class="ctrl-slider" id="ctrl-rot" min="0" max="360" value="0">
+    </div>
+    <div class="ctrl-btns">
+      <button class="ctrl-btn" id="ctrl-vis">Afficher</button>
+      <button class="ctrl-btn" id="ctrl-lock">Libre</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── NAV THEME ──────────────────────────────────────────────
+const nav = document.getElementById('navbar');
+const themedSections = [...document.querySelectorAll('[data-nav-theme]')];
+function updateNavTheme() {
+  const navH = 70;
+  let theme = 'dark';
+  themedSections.forEach(sec => {
+    const r = sec.getBoundingClientRect();
+    if (r.top <= navH && r.bottom >= 0) theme = sec.dataset.navTheme;
+  });
+  nav.classList.toggle('nav--light', theme === 'light');
+}
+window.addEventListener('scroll', updateNavTheme, { passive: true });
+updateNavTheme();
+
+// ── FADE UP ────────────────────────────────────────────────
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+// ── CHARACTER SYSTEM ───────────────────────────────────────
+const charEls = [...document.querySelectorAll('.char-el')];
+const charState = charEls.map(() => ({
+  size: 180, rot: 0, locked: false, visible: false, left: 80, top: 120
+}));
+
+const CHAR_STORAGE_KEY = 'mdlm-chars-v1';
+function saveChars() {
+  localStorage.setItem(CHAR_STORAGE_KEY, JSON.stringify(charState));
+}
+function loadChars() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(CHAR_STORAGE_KEY));
+    if (saved && saved.length === charState.length) {
+      saved.forEach((s, i) => Object.assign(charState[i], s));
+    }
+  } catch(e) {}
+}
+loadChars();
+
+let activeChar = 0;
+let dragging = null;
+let dragOffX = 0, dragOffY = 0;
+
+const sizeSlider = document.getElementById('ctrl-size');
+const rotSlider  = document.getElementById('ctrl-rot');
+const sizeVal    = document.getElementById('size-val');
+const rotVal     = document.getElementById('rot-val');
+const visBtn     = document.getElementById('ctrl-vis');
+const lockBtn    = document.getElementById('ctrl-lock');
+
+function applyState(i) {
+  const el = charEls[i];
+  const s  = charState[i];
+  el.style.width   = s.size + 'px';
+  el.style.left    = s.left + 'px';
+  el.style.top     = s.top  + 'px';
+  el.style.opacity = s.visible ? '1' : '0';
+  el.style.pointerEvents = s.visible ? 'all' : 'none';
+  el.style.transform = `rotate(${s.rot}deg)`;
+  el.classList.toggle('locked', s.locked);
+  el.style.cursor = s.locked ? 'default' : 'grab';
+}
+
+function syncControls() {
+  const s = charState[activeChar];
+  sizeSlider.value = s.size;
+  rotSlider.value  = s.rot;
+  sizeVal.textContent = s.size + 'px';
+  rotVal.textContent  = s.rot + '°';
+  visBtn.textContent  = s.visible ? 'Masquer' : 'Afficher';
+  visBtn.classList.toggle('active', s.visible);
+  lockBtn.textContent = s.locked ? 'Verrouillé' : 'Libre';
+  lockBtn.classList.toggle('active', s.locked);
+}
+
+// Tab switching
+document.querySelectorAll('.char-tab').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.char-tab').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeChar = +btn.dataset.char;
+    syncControls();
+  });
+});
+
+// Sliders
+sizeSlider.addEventListener('input', () => {
+  charState[activeChar].size = +sizeSlider.value;
+  sizeVal.textContent = sizeSlider.value + 'px';
+  applyState(activeChar);
+  saveChars();
+});
+rotSlider.addEventListener('input', () => {
+  charState[activeChar].rot = +rotSlider.value;
+  rotVal.textContent = rotSlider.value + '°';
+  applyState(activeChar);
+  saveChars();
+});
+
+// Visibility toggle
+visBtn.addEventListener('click', () => {
+  const s = charState[activeChar];
+  s.visible = !s.visible;
+  applyState(activeChar);
+  syncControls();
+  saveChars();
+});
+
+// Lock toggle
+lockBtn.addEventListener('click', () => {
+  const s = charState[activeChar];
+  s.locked = !s.locked;
+  applyState(activeChar);
+  syncControls();
+  saveChars();
+});
+
+// Drag
+document.addEventListener('mousedown', e => {
+  const el = e.target.closest('.char-el');
+  if (!el) return;
+  const id = +el.dataset.charId;
+  if (charState[id].locked) return;
+  dragging = el;
+  dragOffX = e.pageX - charState[id].left;
+  dragOffY = e.pageY - charState[id].top;
+  el.style.cursor = 'grabbing';
+  el.style.zIndex = 999;
+  e.preventDefault();
+});
+document.addEventListener('mousemove', e => {
+  if (!dragging) return;
+  const id = +dragging.dataset.charId;
+  charState[id].left = e.pageX - dragOffX;
+  charState[id].top  = e.pageY - dragOffY;
+  dragging.style.left = charState[id].left + 'px';
+  dragging.style.top  = charState[id].top  + 'px';
+});
+document.addEventListener('mouseup', () => {
+  if (dragging) {
+    const id = +dragging.dataset.charId;
+    dragging.style.cursor = charState[id].locked ? 'default' : 'grab';
+    dragging.style.zIndex = '';
+    dragging = null;
+    saveChars();
+  }
+});
+
+// Init
+charEls.forEach((_, i) => applyState(i));
+syncControls();
+
+// ── EDITOR COLLAPSE ────────────────────────────────────────
+const editorBody = document.getElementById('char-editor-body');
+const collapseBtn = document.getElementById('char-editor-collapse');
+collapseBtn.addEventListener('click', () => {
+  const collapsed = editorBody.style.display === 'none';
+  editorBody.style.display = collapsed ? 'block' : 'none';
+  collapseBtn.textContent = collapsed ? '−' : '+';
+});
+</script>
+</body>
+</html>
