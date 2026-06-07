@@ -443,7 +443,7 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
 .fade-up.visible{opacity:1;transform:translateY(0)}
 
 /* ── PLANT LAYER ── */
-#plant-layer{position:fixed;top:0;left:0;width:100%;height:0;overflow:visible;pointer-events:none;z-index:2}
+#plant-layer{position:absolute;top:0;left:0;width:0;height:0;overflow:visible;pointer-events:none;z-index:2}
 .plant-el{
   position:absolute;cursor:grab;pointer-events:all;user-select:none;
   transform-origin:center center;transition:opacity 0.2s;
@@ -486,7 +486,7 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
 .plant-tab:hover:not(.active){background:rgba(247,240,228,0.1)}
 
 /* ── CHARACTER LAYER ── */
-#char-layer{position:fixed;top:0;left:0;width:100%;height:0;overflow:visible;pointer-events:none;z-index:500}
+#char-layer{position:absolute;top:0;left:0;width:0;height:0;overflow:visible;pointer-events:none;z-index:500}
 .char-el{
   position:absolute;
   cursor:grab;
@@ -1070,7 +1070,7 @@ const charState = charEls.map(() => ({
   size: 180, rot: 0, locked: false, visible: false, left: 80, top: 120
 }));
 
-const CHAR_STORAGE_KEY = 'mdlm-chars-v1';
+const CHAR_STORAGE_KEY = 'mdlm-chars-v2';
 function saveChars() {
   localStorage.setItem(CHAR_STORAGE_KEY, JSON.stringify(charState));
 }
@@ -1169,8 +1169,8 @@ document.addEventListener('mousedown', e => {
   const id = +el.dataset.charId;
   if (charState[id].locked) return;
   dragging = el;
-  dragOffX = e.clientX - charState[id].left;
-  dragOffY = e.clientY - charState[id].top;
+  dragOffX = e.pageX - charState[id].left;
+  dragOffY = e.pageY - charState[id].top;
   el.style.cursor = 'grabbing';
   el.style.zIndex = 999;
   e.preventDefault();
@@ -1178,8 +1178,8 @@ document.addEventListener('mousedown', e => {
 document.addEventListener('mousemove', e => {
   if (!dragging) return;
   const id = +dragging.dataset.charId;
-  charState[id].left = e.clientX - dragOffX;
-  charState[id].top  = e.clientY - dragOffY;
+  charState[id].left = e.pageX - dragOffX;
+  charState[id].top  = e.pageY - dragOffY;
   dragging.style.left = charState[id].left + 'px';
   dragging.style.top  = charState[id].top  + 'px';
 });
@@ -1220,7 +1220,7 @@ const plantRotVal     = document.getElementById('plant-rot-val');
 const plantVisBtn     = document.getElementById('plant-ctrl-vis');
 const plantLockBtn    = document.getElementById('plant-ctrl-lock');
 
-const PLANT_KEY = 'mdlm-plants-v1';
+const PLANT_KEY = 'mdlm-plants-v2';
 function savePlants(){ localStorage.setItem(PLANT_KEY, JSON.stringify(plantState)); }
 function loadPlants(){
   try {
@@ -1282,15 +1282,15 @@ document.addEventListener('mousedown', e => {
   const id = +el.dataset.plantId;
   if (plantState[id].locked) return;
   draggingPlant = el;
-  plantDragOffX = e.clientX - plantState[id].left;
-  plantDragOffY = e.clientY - plantState[id].top;
+  plantDragOffX = e.pageX - plantState[id].left;
+  plantDragOffY = e.pageY - plantState[id].top;
   el.style.cursor = 'grabbing'; el.style.zIndex = 998; e.preventDefault();
 });
 document.addEventListener('mousemove', e => {
   if (!draggingPlant) return;
   const id = +draggingPlant.dataset.plantId;
-  plantState[id].left = e.clientX - plantDragOffX;
-  plantState[id].top  = e.clientY - plantDragOffY;
+  plantState[id].left = e.pageX - plantDragOffX;
+  plantState[id].top  = e.pageY - plantDragOffY;
   draggingPlant.style.left = plantState[id].left + 'px';
   draggingPlant.style.top  = plantState[id].top  + 'px';
 });
