@@ -286,25 +286,33 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
   font-size:clamp(52px,8vw,120px);
   color:#1E211E;line-height:0.88;letter-spacing:-0.01em;
 }
+.carousel-overflow{overflow:hidden;padding:40px 0 60px}
 .carousel-track{
-  display:flex;gap:28px;
-  overflow-x:auto;scroll-snap-type:x mandatory;
-  padding:40px 64px 60px;
-  scrollbar-width:none;-ms-overflow-style:none;
-  cursor:grab;
+  display:inline-flex;gap:28px;
+  animation:carousel-scroll 40s linear infinite;
+  padding:0 14px;
 }
-.carousel-track::-webkit-scrollbar{display:none}
-.carousel-track:active{cursor:grabbing}
+.carousel-track:hover{animation-play-state:paused}
+@keyframes carousel-scroll{
+  0%{transform:translateX(0)}
+  100%{transform:translateX(-50%)}
+}
 .carousel-card{
-  flex:0 0 340px;height:460px;
+  flex:0 0 320px;height:440px;
   border-radius:20px;overflow:hidden;
-  position:relative;scroll-snap-align:start;
+  position:relative;
   box-shadow:0 16px 48px rgba(30,33,30,0.15);
   transition:transform 0.35s ease,box-shadow 0.35s ease;
 }
-.carousel-card:nth-child(odd){transform:rotate(-2.5deg);margin-top:0}
-.carousel-card:nth-child(even){transform:rotate(2deg);margin-top:40px}
-.carousel-card:hover{transform:rotate(0deg) scale(1.02)!important;box-shadow:0 24px 64px rgba(30,33,30,0.25)}
+.carousel-card:nth-child(8n+1){transform:rotate(-2.5deg)}
+.carousel-card:nth-child(8n+2){transform:rotate(2deg);margin-top:40px}
+.carousel-card:nth-child(8n+3){transform:rotate(-1.5deg)}
+.carousel-card:nth-child(8n+4){transform:rotate(2.5deg);margin-top:32px}
+.carousel-card:nth-child(8n+5){transform:rotate(-2.5deg)}
+.carousel-card:nth-child(8n+6){transform:rotate(2deg);margin-top:40px}
+.carousel-card:nth-child(8n+7){transform:rotate(-1.5deg)}
+.carousel-card:nth-child(8n+8){transform:rotate(2.5deg);margin-top:32px}
+.carousel-card:hover{transform:rotate(0deg) scale(1.03)!important;box-shadow:0 24px 64px rgba(30,33,30,0.25)}
 .carousel-card img{
   width:100%;height:100%;object-fit:cover;display:block;
 }
@@ -811,15 +819,27 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
     <span class="carousel-eyebrow fade-up">résultats</span>
     <div class="carousel-title fade-up">AVANT / APRÈS</div>
   </div>
-  <div class="carousel-track" id="carouselTrack">
-    <div class="carousel-card fade-up"><img src="before1.jpg" alt="Avant 1"><span class="carousel-card-label">Avant</span><span class="carousel-card-type">Résidentiel</span></div>
-    <div class="carousel-card fade-up"><img src="after1.jpg" alt="Après 1"><span class="carousel-card-label apres">Après</span><span class="carousel-card-type">Résidentiel</span></div>
-    <div class="carousel-card fade-up"><img src="before2.jpg" alt="Avant 2"><span class="carousel-card-label">Avant</span><span class="carousel-card-type">Résidentiel</span></div>
-    <div class="carousel-card fade-up"><img src="after2.jpg" alt="Après 2"><span class="carousel-card-label apres">Après</span><span class="carousel-card-type">Résidentiel</span></div>
-    <div class="carousel-card fade-up"><img src="before3.jpg" alt="Avant 3"><span class="carousel-card-label">Avant</span><span class="carousel-card-type">Commercial</span></div>
-    <div class="carousel-card fade-up"><img src="after3.jpg" alt="Après 3"><span class="carousel-card-label apres">Après</span><span class="carousel-card-type">Commercial</span></div>
-    <div class="carousel-card fade-up"><img src="before4.jpg" alt="Avant 4"><span class="carousel-card-label">Avant</span><span class="carousel-card-type">Résidentiel</span></div>
-    <div class="carousel-card fade-up"><img src="after4.jpg" alt="Après 4"><span class="carousel-card-label apres">Après</span><span class="carousel-card-type">Résidentiel</span></div>
+  <div class="carousel-overflow">
+    <div class="carousel-track">
+      <!-- Set 1 -->
+      <div class="carousel-card"><img src="before1.jpg" alt="Avant 1"><span class="carousel-card-label">Avant</span><span class="carousel-card-type">Résidentiel</span></div>
+      <div class="carousel-card"><img src="after1.jpg" alt="Après 1"><span class="carousel-card-label apres">Après</span><span class="carousel-card-type">Résidentiel</span></div>
+      <div class="carousel-card"><img src="before2.jpg" alt="Avant 2"><span class="carousel-card-label">Avant</span><span class="carousel-card-type">Résidentiel</span></div>
+      <div class="carousel-card"><img src="after2.jpg" alt="Après 2"><span class="carousel-card-label apres">Après</span><span class="carousel-card-type">Résidentiel</span></div>
+      <div class="carousel-card"><img src="before3.jpg" alt="Avant 3"><span class="carousel-card-label">Avant</span><span class="carousel-card-type">Commercial</span></div>
+      <div class="carousel-card"><img src="after3.jpg" alt="Après 3"><span class="carousel-card-label apres">Après</span><span class="carousel-card-type">Commercial</span></div>
+      <div class="carousel-card"><img src="before4.jpg" alt="Avant 4"><span class="carousel-card-label">Avant</span><span class="carousel-card-type">Résidentiel</span></div>
+      <div class="carousel-card"><img src="after4.jpg" alt="Après 4"><span class="carousel-card-label apres">Après</span><span class="carousel-card-type">Résidentiel</span></div>
+      <!-- Set 2 — duplicate for seamless loop -->
+      <div class="carousel-card"><img src="before1.jpg" alt="Avant 1"><span class="carousel-card-label">Avant</span><span class="carousel-card-type">Résidentiel</span></div>
+      <div class="carousel-card"><img src="after1.jpg" alt="Après 1"><span class="carousel-card-label apres">Après</span><span class="carousel-card-type">Résidentiel</span></div>
+      <div class="carousel-card"><img src="before2.jpg" alt="Avant 2"><span class="carousel-card-label">Avant</span><span class="carousel-card-type">Résidentiel</span></div>
+      <div class="carousel-card"><img src="after2.jpg" alt="Après 2"><span class="carousel-card-label apres">Après</span><span class="carousel-card-type">Résidentiel</span></div>
+      <div class="carousel-card"><img src="before3.jpg" alt="Avant 3"><span class="carousel-card-label">Avant</span><span class="carousel-card-type">Commercial</span></div>
+      <div class="carousel-card"><img src="after3.jpg" alt="Après 3"><span class="carousel-card-label apres">Après</span><span class="carousel-card-type">Commercial</span></div>
+      <div class="carousel-card"><img src="before4.jpg" alt="Avant 4"><span class="carousel-card-label">Avant</span><span class="carousel-card-type">Résidentiel</span></div>
+      <div class="carousel-card"><img src="after4.jpg" alt="Après 4"><span class="carousel-card-label apres">Après</span><span class="carousel-card-type">Résidentiel</span></div>
+    </div>
   </div>
 </section>
 
@@ -981,24 +1001,6 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
 </div>
 
 <script>
-// ── CAROUSEL DRAG-TO-SCROLL ────────────────────────────────
-(function(){
-  const track = document.getElementById('carouselTrack');
-  if (!track) return;
-  let isDown = false, startX, scrollLeft;
-  track.addEventListener('mousedown', e => {
-    isDown = true; startX = e.pageX - track.offsetLeft; scrollLeft = track.scrollLeft;
-  });
-  track.addEventListener('mouseleave', () => { isDown = false; });
-  track.addEventListener('mouseup', () => { isDown = false; });
-  track.addEventListener('mousemove', e => {
-    if (!isDown) return;
-    e.preventDefault();
-    const x = e.pageX - track.offsetLeft;
-    track.scrollLeft = scrollLeft - (x - startX) * 1.5;
-  });
-})();
-
 // ── NAV THEME ──────────────────────────────────────────────
 const nav = document.getElementById('navbar');
 const themedSections = [...document.querySelectorAll('[data-nav-theme]')];
