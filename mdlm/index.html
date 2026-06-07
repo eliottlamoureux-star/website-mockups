@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
-<title>Main dans la main Entretien — Laval</title>
+<title>MDLM · Main dans la main Entretien</title>
 <link rel="icon" type="image/svg+xml" href="mdlm-logo.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -72,7 +72,7 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
 .nav--light .nav-center a:hover{color:#1E211E}
 .nav--light .nav-center .sep{color:rgba(30,33,30,0.25)}
 .nav--light .nav-label{color:rgba(30,33,30,0.5)}
-.nav--light .nav-cta{background:#1E211E;color:#F7F0E4}
+.nav--light .nav-cta{background:#1E211E;color:#f5f1e8}
 .nav--light .nav-cta:hover{background:#3A3E3A}
 
 /* ── HERO ── */
@@ -91,7 +91,7 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
 }
 .hero{
   min-height:100vh;
-  background:#7A9B6A;
+  background:#a8bca1;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   position:relative;overflow:hidden;
   padding:120px 20px 80px;
@@ -140,10 +140,10 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
 }
 .s-service.reverse{flex-direction:row-reverse}
 
-.s-blue{background:#C4897A}
-.s-yellow{background:#F7F0E4}
-.s-rose{background:#7A9B6A}
-.s-green{background:#C4897A}
+.s-blue{background:#d4b2a7}
+.s-yellow{background:#f5f1e8}
+.s-rose{background:#a8bca1}
+.s-green{background:#d4b2a7}
 
 .service-photo{
   flex:0 0 auto;width:45%;
@@ -170,7 +170,7 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
 .card-header-left{display:flex;align-items:center;gap:10px}
 .card-num{
   font-family:'Space Mono',monospace;font-size:13px;font-weight:700;
-  color:#C4897A;letter-spacing:0.05em;
+  color:#d4b2a7;letter-spacing:0.05em;
 }
 .card-tag{
   font-family:'DM Mono',monospace;font-size:11px;
@@ -198,12 +198,12 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
 .card-item{
   display:flex;align-items:flex-start;gap:12px;
   padding:12px 14px;border:1px solid rgba(30,33,30,0.07);
-  border-radius:10px;background:#F7F0E4;
+  border-radius:10px;background:#f5f1e8;
 }
 .card-item+.card-item{margin-top:6px}
 .item-star{
   width:34px;height:34px;flex-shrink:0;
-  background:#C4897A;border-radius:8px;
+  background:#d4b2a7;border-radius:8px;
   display:flex;align-items:center;justify-content:center;
   color:#fff;font-size:14px;margin-top:1px;
 }
@@ -247,7 +247,7 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
   color:rgba(255,255,255,0.6);line-height:1.85;
   margin-top:8px;
 }
-.team-story em{color:#C4897A;font-style:normal}
+.team-story em{color:#d4b2a7;font-style:normal}
 .team-browser{
   border-radius:16px;overflow:hidden;
   box-shadow:0 32px 80px rgba(0,0,0,0.5);
@@ -267,11 +267,11 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
   color:rgba(255,255,255,0.4);letter-spacing:0.08em;text-transform:uppercase;
   display:flex;align-items:center;gap:8px;
 }
-.team-value::before{content:'✦';color:#C4897A;font-size:14px}
+.team-value::before{content:'✦';color:#d4b2a7;font-size:14px}
 
 /* ── BEFORE/AFTER CAROUSEL ── */
 .s-carousel{
-  background:#F7F0E4;
+  background:#f5f1e8;
   padding:100px 0 80px;
   overflow:hidden;
 }
@@ -325,11 +325,18 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
   background:rgba(30,33,30,0.55);backdrop-filter:blur(6px);
   border-radius:100px;padding:5px 12px;
 }
-.carousel-card-label.apres{background:rgba(122,155,106,0.8)}
+.carousel-card-label.apres{background:rgba(168,188,161,0.85)}
+.carousel-card-type{
+  position:absolute;bottom:16px;right:16px;
+  font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.1em;
+  color:#f5f1e8;text-transform:uppercase;
+  background:rgba(30,33,30,0.45);backdrop-filter:blur(6px);
+  border-radius:100px;padding:4px 10px;
+}
 
 /* ── CONTACT SECTION ── */
 .s-contact{
-  background:#F7F0E4;
+  background:#f5f1e8;
   min-height:100vh;
   display:flex;flex-direction:column;
   align-items:center;justify-content:center;
@@ -348,7 +355,7 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
   color:rgba(247,240,228,0.45);letter-spacing:0.1em;text-transform:uppercase;
   margin-bottom:10px;display:block;
 }
-.contact-card-value{font-family:'Space Mono',monospace;font-size:16px;font-weight:700;color:#F7F0E4;line-height:1.4}
+.contact-card-value{font-family:'Space Mono',monospace;font-size:16px;font-weight:700;color:#f5f1e8;line-height:1.4}
 .contact-card.wide{grid-column:1/-1}
 .calendly-wrap{
   grid-column:1/-1;
@@ -362,16 +369,16 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
 .calendly-btn{
   display:inline-block;
   padding:18px 48px;
-  background:#1E211E;color:#F7F0E4;
+  background:#1E211E;color:#f5f1e8;
   font-family:'Space Mono',monospace;font-size:13px;font-weight:700;
   letter-spacing:0.06em;text-transform:uppercase;text-decoration:none;
   border-radius:100px;transition:all 0.2s;
 }
-.calendly-btn:hover{background:#7A9B6A;transform:translateY(-2px);box-shadow:0 8px 32px rgba(122,155,106,0.3)}
+.calendly-btn:hover{background:#a8bca1;transform:translateY(-2px);box-shadow:0 8px 32px rgba(122,155,106,0.3)}
 
 /* ── CTA SECTION ── */
 .s-cta{
-  background:#7A9B6A;
+  background:#a8bca1;
   display:flex;flex-direction:column;align-items:center;
   position:relative;overflow:hidden;padding:80px 40px 40px;
 }
@@ -469,7 +476,7 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
   border-bottom:1px solid rgba(247,240,228,0.08);
   cursor:move;
 }
-#plant-editor-title{font-size:11px;font-weight:500;color:#F7F0E4;letter-spacing:0.08em;text-transform:uppercase}
+#plant-editor-title{font-size:11px;font-weight:500;color:#f5f1e8;letter-spacing:0.08em;text-transform:uppercase}
 #plant-editor-collapse{
   background:none;border:none;color:rgba(247,240,228,0.5);cursor:pointer;
   font-size:16px;line-height:1;padding:0 2px;
@@ -482,7 +489,7 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
   border-radius:6px;font-family:'DM Mono',monospace;font-size:11px;
   color:rgba(247,240,228,0.55);cursor:pointer;transition:all 0.15s;
 }
-.plant-tab.active{background:#7A9B6A;border-color:#7A9B6A;color:#fff}
+.plant-tab.active{background:#a8bca1;border-color:#a8bca1;color:#fff}
 .plant-tab:hover:not(.active){background:rgba(247,240,228,0.1)}
 
 /* ── CHARACTER LAYER ── */
@@ -500,7 +507,7 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
 .char-el img{width:100%;height:auto;display:block;pointer-events:none}
 .char-el .char-handle{
   position:absolute;top:-6px;right:-6px;
-  width:14px;height:14px;background:#C4897A;border-radius:50%;
+  width:14px;height:14px;background:#d4b2a7;border-radius:50%;
   cursor:pointer;display:none;
 }
 .char-el:hover .char-handle{display:block}
@@ -524,7 +531,7 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
   border-bottom:1px solid rgba(247,240,228,0.08);
   cursor:move;
 }
-#char-editor-title{font-size:11px;font-weight:500;color:#F7F0E4;letter-spacing:0.08em;text-transform:uppercase}
+#char-editor-title{font-size:11px;font-weight:500;color:#f5f1e8;letter-spacing:0.08em;text-transform:uppercase}
 #char-editor-collapse{
   background:none;border:none;color:rgba(247,240,228,0.5);cursor:pointer;
   font-size:16px;line-height:1;padding:0 2px;
@@ -537,7 +544,7 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
   border-radius:6px;font-family:'DM Mono',monospace;font-size:11px;
   color:rgba(247,240,228,0.55);cursor:pointer;transition:all 0.15s;
 }
-.char-tab.active{background:#C4897A;border-color:#C4897A;color:#fff}
+.char-tab.active{background:#d4b2a7;border-color:#d4b2a7;color:#fff}
 .char-tab:hover:not(.active){background:rgba(247,240,228,0.1)}
 .ctrl-block{margin-bottom:10px}
 .ctrl-label{
@@ -551,7 +558,7 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
 }
 .ctrl-slider::-webkit-slider-thumb{
   -webkit-appearance:none;width:14px;height:14px;border-radius:50%;
-  background:#C4897A;cursor:pointer;border:none;
+  background:#d4b2a7;cursor:pointer;border:none;
 }
 .ctrl-btns{display:flex;gap:6px;margin-top:12px}
 .ctrl-btn{
@@ -559,8 +566,8 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
   background:rgba(247,240,228,0.05);font-family:'DM Mono',monospace;font-size:10px;
   color:rgba(247,240,228,0.7);cursor:pointer;transition:all 0.15s;letter-spacing:0.04em;
 }
-.ctrl-btn:hover{background:rgba(247,240,228,0.1);color:#F7F0E4}
-.ctrl-btn.active{background:#7A9B6A;border-color:#7A9B6A;color:#fff}
+.ctrl-btn:hover{background:rgba(247,240,228,0.1);color:#f5f1e8}
+.ctrl-btn.active{background:#a8bca1;border-color:#a8bca1;color:#fff}
 
 /* ── MOBILE ── */
 @media(max-width:900px){
@@ -783,8 +790,10 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
       <div class="team-eyebrow fade-up">notre histoire</div>
       <div class="team-title fade-up">L'ÉQUIPE</div>
       <p class="team-story fade-up">
-        <!-- Client story placeholder — replace with actual text when provided -->
-        Main dans la main Entretien, c'est l'histoire de deux partenaires de vie qui ont décidé de mettre leurs valeurs au service des familles de Laval. <em>Fondée sur la confiance, la minutie et le respect</em>, leur entreprise est née d'un désir simple : offrir un service d'entretien ménager irréprochable, humain et fiable. Chaque maison qu'ils nettoient, ils la traitent comme la leur.
+        Main dans la Main Entretien est née d'un rêve que mon conjoint et moi avons choisi de bâtir ensemble, avec passion, confiance et beaucoup d'amour.<br><br>
+        Nous avons créé cette entreprise parce que nous croyons qu'un environnement propre et bien entretenu apporte bien plus qu'une belle apparence : il procure une véritable paix d'esprit. Dans le rythme effréné de la vie quotidienne, nous savons à quel point il peut être difficile de tout concilier. C'est pourquoi nous avons décidé de mettre notre énergie et notre savoir-faire au service des familles et des entreprises de notre communauté.<br><br>
+        Pour nous, Main dans la Main Entretien, ce n'est pas seulement un nom. C'est une façon de travailler, de servir nos clients et de construire des relations durables basées sur la confiance.<br><br>
+        <em>Merci de nous permettre de faire une différence dans votre quotidien, un espace propre à la fois.</em>
       </p>
       <div class="team-values fade-up">
         <div class="team-value">Propreté</div>
@@ -803,51 +812,14 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
     <div class="carousel-title fade-up">AVANT / APRÈS</div>
   </div>
   <div class="carousel-track" id="carouselTrack">
-    <!-- Pair 1 -->
-    <div class="carousel-card fade-up">
-      <div class="carousel-card-placeholder">
-        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#1E211E" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-        <span>Photo avant — à venir</span>
-      </div>
-      <span class="carousel-card-label">Avant</span>
-    </div>
-    <div class="carousel-card fade-up">
-      <div class="carousel-card-placeholder" style="background:#d4e4cc">
-        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#1E211E" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-        <span>Photo après — à venir</span>
-      </div>
-      <span class="carousel-card-label apres">Après</span>
-    </div>
-    <!-- Pair 2 -->
-    <div class="carousel-card fade-up">
-      <div class="carousel-card-placeholder">
-        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#1E211E" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-        <span>Photo avant — à venir</span>
-      </div>
-      <span class="carousel-card-label">Avant</span>
-    </div>
-    <div class="carousel-card fade-up">
-      <div class="carousel-card-placeholder" style="background:#d4e4cc">
-        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#1E211E" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-        <span>Photo après — à venir</span>
-      </div>
-      <span class="carousel-card-label apres">Après</span>
-    </div>
-    <!-- Pair 3 -->
-    <div class="carousel-card fade-up">
-      <div class="carousel-card-placeholder">
-        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#1E211E" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-        <span>Photo avant — à venir</span>
-      </div>
-      <span class="carousel-card-label">Avant</span>
-    </div>
-    <div class="carousel-card fade-up">
-      <div class="carousel-card-placeholder" style="background:#d4e4cc">
-        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#1E211E" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-        <span>Photo après — à venir</span>
-      </div>
-      <span class="carousel-card-label apres">Après</span>
-    </div>
+    <div class="carousel-card fade-up"><img src="before1.jpg" alt="Avant 1"><span class="carousel-card-label">Avant</span><span class="carousel-card-type">Résidentiel</span></div>
+    <div class="carousel-card fade-up"><img src="after1.jpg" alt="Après 1"><span class="carousel-card-label apres">Après</span><span class="carousel-card-type">Résidentiel</span></div>
+    <div class="carousel-card fade-up"><img src="before2.jpg" alt="Avant 2"><span class="carousel-card-label">Avant</span><span class="carousel-card-type">Résidentiel</span></div>
+    <div class="carousel-card fade-up"><img src="after2.jpg" alt="Après 2"><span class="carousel-card-label apres">Après</span><span class="carousel-card-type">Résidentiel</span></div>
+    <div class="carousel-card fade-up"><img src="before3.jpg" alt="Avant 3"><span class="carousel-card-label">Avant</span><span class="carousel-card-type">Commercial</span></div>
+    <div class="carousel-card fade-up"><img src="after3.jpg" alt="Après 3"><span class="carousel-card-label apres">Après</span><span class="carousel-card-type">Commercial</span></div>
+    <div class="carousel-card fade-up"><img src="before4.jpg" alt="Avant 4"><span class="carousel-card-label">Avant</span><span class="carousel-card-type">Résidentiel</span></div>
+    <div class="carousel-card fade-up"><img src="after4.jpg" alt="Après 4"><span class="carousel-card-label apres">Après</span><span class="carousel-card-type">Résidentiel</span></div>
   </div>
 </section>
 
@@ -923,22 +895,10 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
 <!-- ── PLANT LAYER ── -->
 <div id="plant-layer">
   <div class="plant-el" data-plant-id="0" style="width:200px;left:100px;top:200px;opacity:0;pointer-events:none">
-    <img src="plants/plant1.svg" draggable="false" onerror="this.style.opacity='0.15';this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 80 120%22><text y=%2260%22 font-size=%2240%22>🌿</text></svg>'">
+    <img src="plants/plant1.svg" draggable="false">
   </div>
   <div class="plant-el" data-plant-id="1" style="width:200px;left:100px;top:200px;opacity:0;pointer-events:none">
-    <img src="plants/plant2.svg" draggable="false" onerror="this.style.opacity='0.15';this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 80 120%22><text y=%2260%22 font-size=%2240%22>🌳</text></svg>'">
-  </div>
-  <div class="plant-el" data-plant-id="2" style="width:200px;left:100px;top:200px;opacity:0;pointer-events:none">
-    <img src="plants/plant3.svg" draggable="false" onerror="this.style.opacity='0.15';this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 80 120%22><text y=%2260%22 font-size=%2240%22>🌱</text></svg>'">
-  </div>
-  <div class="plant-el" data-plant-id="3" style="width:200px;left:100px;top:200px;opacity:0;pointer-events:none">
-    <img src="plants/plant4.svg" draggable="false" onerror="this.style.opacity='0.15';this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 80 120%22><text y=%2260%22 font-size=%2240%22>🌾</text></svg>'">
-  </div>
-  <div class="plant-el" data-plant-id="4" style="width:200px;left:100px;top:200px;opacity:0;pointer-events:none">
-    <img src="plants/plant5.svg" draggable="false" onerror="this.style.opacity='0.15';this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 80 120%22><text y=%2260%22 font-size=%2240%22>🍃</text></svg>'">
-  </div>
-  <div class="plant-el" data-plant-id="5" style="width:200px;left:100px;top:200px;opacity:0;pointer-events:none">
-    <img src="plants/plant6.svg" draggable="false" onerror="this.style.opacity='0.15';this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 80 120%22><text y=%2260%22 font-size=%2240%22>🌲</text></svg>'">
+    <img src="plants/plant2.svg" draggable="false">
   </div>
 </div>
 
@@ -952,10 +912,6 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
     <div class="plant-tabs">
       <button class="plant-tab active" data-plant="0">P1</button>
       <button class="plant-tab" data-plant="1">P2</button>
-      <button class="plant-tab" data-plant="2">P3</button>
-      <button class="plant-tab" data-plant="3">P4</button>
-      <button class="plant-tab" data-plant="4">P5</button>
-      <button class="plant-tab" data-plant="5">P6</button>
     </div>
     <div class="ctrl-block">
       <div class="ctrl-label">Taille <span id="plant-size-val">200px</span></div>
@@ -1220,7 +1176,7 @@ const plantRotVal     = document.getElementById('plant-rot-val');
 const plantVisBtn     = document.getElementById('plant-ctrl-vis');
 const plantLockBtn    = document.getElementById('plant-ctrl-lock');
 
-const PLANT_KEY = 'mdlm-plants-v2';
+const PLANT_KEY = 'mdlm-plants-v3';
 function savePlants(){ localStorage.setItem(PLANT_KEY, JSON.stringify(plantState)); }
 function loadPlants(){
   try {
