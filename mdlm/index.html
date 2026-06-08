@@ -1291,6 +1291,26 @@ plantCollapseBtn.addEventListener('click', () => {
   plantEditorBody.style.display = collapsed ? 'block' : 'none';
   plantCollapseBtn.textContent = collapsed ? '−' : '+';
 });
+
+// ── EXPORT BUTTON ────────────────────────────────────────
+const exportBtn = document.createElement('button');
+exportBtn.textContent = '📋 Export positions';
+exportBtn.style.cssText = 'position:fixed;bottom:24px;left:24px;z-index:9999;background:#1E211E;color:#f5f1e8;font-family:DM Mono,monospace;font-size:12px;padding:10px 16px;border:1px solid rgba(247,240,228,0.2);border-radius:10px;cursor:pointer;';
+document.body.appendChild(exportBtn);
+
+const exportModal = document.createElement('div');
+exportModal.style.cssText = 'display:none;position:fixed;bottom:70px;left:24px;z-index:9999;background:#1E211E;border:1px solid rgba(247,240,228,0.2);border-radius:14px;padding:16px;width:340px;font-family:DM Mono,monospace;font-size:11px;color:#f5f1e8;box-shadow:0 16px 48px rgba(0,0,0,0.5);';
+exportModal.innerHTML = '<div style="margin-bottom:8px;opacity:0.5;letter-spacing:0.06em;text-transform:uppercase;font-size:10px;">CHARS</div><textarea id="exp-chars" style="width:100%;height:60px;background:rgba(247,240,228,0.06);border:1px solid rgba(247,240,228,0.12);border-radius:8px;color:#f5f1e8;font-family:DM Mono,monospace;font-size:10px;padding:8px;resize:none;" readonly></textarea><div style="margin:10px 0 8px;opacity:0.5;letter-spacing:0.06em;text-transform:uppercase;font-size:10px;">PLANTS</div><textarea id="exp-plants" style="width:100%;height:60px;background:rgba(247,240,228,0.06);border:1px solid rgba(247,240,228,0.12);border-radius:8px;color:#f5f1e8;font-family:DM Mono,monospace;font-size:10px;padding:8px;resize:none;" readonly></textarea>';
+document.body.appendChild(exportModal);
+
+exportBtn.addEventListener('click', () => {
+  const showing = exportModal.style.display === 'block';
+  exportModal.style.display = showing ? 'none' : 'block';
+  if (!showing) {
+    document.getElementById('exp-chars').value = localStorage.getItem('mdlm-chars-v2') || 'null';
+    document.getElementById('exp-plants').value = localStorage.getItem('mdlm-plants-v4') || 'null';
+  }
+});
 </script>
 </body>
 </html>
