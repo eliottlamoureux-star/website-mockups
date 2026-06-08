@@ -93,7 +93,7 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
   min-height:100vh;
   background:#a8bca1;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
-  position:relative;overflow:hidden;
+  position:relative;overflow:visible;
   padding:120px 20px 80px;
 }
 .hero-display{
@@ -134,7 +134,7 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
 .s-service{
   min-height:100vh;
   display:flex;align-items:center;justify-content:space-between;
-  position:relative;overflow:hidden;
+  position:relative;overflow:visible;
   padding:80px 64px;
   gap:48px;
 }
@@ -220,7 +220,7 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
 .s-team{
   background:#1E211E;
   padding:100px 64px;
-  position:relative;overflow:hidden;
+  position:relative;overflow:visible;
 }
 .team-layout{
   display:grid;grid-template-columns:1fr 1fr;gap:80px;
@@ -273,7 +273,7 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
 .s-carousel{
   background:#f5f1e8;
   padding:100px 0 80px;
-  overflow:hidden;
+  position:relative;overflow:visible;
 }
 .carousel-header{padding:0 64px;margin-bottom:48px;text-align:left}
 .carousel-eyebrow{
@@ -344,6 +344,7 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
   display:flex;flex-direction:column;
   align-items:center;justify-content:center;
   padding:80px 64px;
+  position:relative;overflow:visible;
 }
 .contact-heading{
   font-family:'Boogaloo',cursive;
@@ -453,26 +454,117 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
 .fade-up.visible{opacity:1;transform:translateY(0)}
 
 
+/* ── HAMBURGER ── */
+.nav-hamburger{
+  display:none;
+  flex-direction:column;justify-content:center;align-items:center;gap:5px;
+  width:36px;height:36px;cursor:pointer;
+  background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);
+  border-radius:8px;padding:0;
+}
+.nav-hamburger span{
+  display:block;width:18px;height:2px;background:rgba(255,255,255,0.85);
+  border-radius:2px;transition:all 0.25s;
+}
+.nav--light .nav-hamburger{
+  background:rgba(30,33,30,0.06);border-color:rgba(30,33,30,0.15);
+}
+.nav--light .nav-hamburger span{background:rgba(30,33,30,0.7)}
+
+/* mobile nav drawer */
+.nav-drawer{
+  display:none;
+  position:fixed;top:0;left:0;width:100%;
+  background:#1E211E;z-index:1000;
+  flex-direction:column;align-items:stretch;
+  padding:80px 24px 32px;gap:0;
+  transform:translateY(-100%);
+  transition:transform 0.3s ease;
+}
+.nav-drawer.open{transform:translateY(0)}
+.nav-drawer a{
+  font-family:'DM Mono',monospace;font-size:18px;color:rgba(255,255,255,0.85);
+  text-decoration:none;padding:16px 0;
+  border-bottom:1px solid rgba(255,255,255,0.08);
+  transition:color 0.2s;
+}
+.nav-drawer a:hover{color:#fff}
+.nav-drawer .drawer-cta{
+  margin-top:24px;text-align:center;
+  background:rgba(247,240,228,0.95);color:#1E211E;
+  padding:14px 24px;border-radius:100px;font-weight:500;
+  border-bottom:none;
+}
+.nav-drawer-close{
+  position:absolute;top:20px;right:20px;
+  width:36px;height:36px;display:flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);
+  border-radius:8px;cursor:pointer;color:rgba(255,255,255,0.7);font-size:18px;
+}
+
 /* ── MOBILE ── */
+/* ── CHARACTERS ── */
+.char-img{position:absolute;pointer-events:none;z-index:10;display:block;}
 @media(max-width:900px){
+  /* Nav */
   .nav{padding:14px 20px}
   .nav-center{display:none}
-  .hero-display{font-size:clamp(56px,16vw,120px)}
-  .hero-photo-wrap{width:320px}
-  .s-service{flex-direction:column!important;padding:80px 24px 48px;justify-content:center;gap:32px}
+  .nav-label{display:none}
+  .nav-hamburger{display:flex}
+  .nav-drawer{display:flex}
+
+  /* Hero */
+  .hero{padding:100px 16px 60px;min-height:auto}
+  .hero-display{font-size:clamp(52px,15vw,110px);padding:0}
+  .hero-badge{margin-bottom:24px}
+
+  /* Bonjour section */
+  .s-dark{padding:60px 16px;min-height:auto}
+  .giant-sub{font-size:16px}
+
+  /* Service sections */
+  .s-service{flex-direction:column!important;padding:60px 16px 48px;justify-content:center;gap:28px;min-height:auto}
   .service-photo,.ritual-card{width:100%;max-width:100%}
-  .service-photo img{height:280px}
-  .card-title{font-size:clamp(42px,12vw,72px)}
-  .giant-text{font-size:clamp(72px,22vw,160px)}
+  .service-photo img{height:220px;max-width:100%}
+  .ritual-card{width:100%}
+  .card-title{font-size:clamp(38px,11vw,68px)}
+  .card-body{padding:20px 20px 24px}
+
+  /* Team */
+  .s-team{padding:60px 16px}
+  .team-layout{grid-template-columns:1fr;gap:40px}
+  .team-photo-col img{height:320px}
   .team-title{font-size:clamp(48px,14vw,100px)}
-  .contact-card-grid{grid-template-columns:1fr}
+  .team-values{gap:16px}
+
+  /* Carousel */
+  .carousel-header{padding:0 16px;margin-bottom:32px}
+  .carousel-overflow{padding:24px 0 40px}
+
+  /* Contact */
+  .s-contact{padding:60px 16px;min-height:auto}
+  .contact-heading{font-size:clamp(48px,14vw,100px);margin-bottom:36px}
+  .contact-card-grid{grid-template-columns:1fr;max-width:100%}
   .contact-card.wide{grid-column:1}
+  .contact-card{padding:20px 24px}
+  .contact-card-value{font-size:13px;word-break:break-word}
   .form-row{grid-template-columns:1fr}
-  .s-contact,.s-team,.s-cta{padding:80px 24px}
-  .cta-display{font-size:clamp(56px,16vw,120px)}
-  .footer-grid{grid-template-columns:1fr 1fr;gap:32px}
-  .footer-bottom{flex-direction:column;gap:16px;text-align:center}
-  .footer-legal{justify-content:center}
+  .calendly-wrap{padding:32px 16px}
+
+  /* CTA / Footer */
+  .s-cta{padding:60px 16px 32px}
+  .cta-display{font-size:clamp(52px,15vw,110px)}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:32px;padding-top:48px}
+  .footer-col:first-child{grid-column:1/-1}
+  .footer-bottom{flex-direction:column;gap:16px;text-align:center;padding-bottom:24px}
+  .footer-legal{justify-content:center;flex-wrap:wrap;gap:12px}
+  .footer-credit{justify-content:center}
+}
+
+@media(max-width:480px){
+  .footer-grid{grid-template-columns:1fr}
+  .footer-col:first-child{grid-column:1}
+  .contact-card-value{font-size:12px}
 }
 </style>
 </head>
@@ -494,7 +586,20 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
   <div class="nav-right">
     <span class="nav-label">Laval · 24h/7j</span>
     <a href="https://calendly.com/mdlmentretien/30min" target="_blank" class="nav-cta">Choisir votre créneau</a>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
+</nav>
+
+<!-- Mobile drawer -->
+<nav class="nav-drawer" id="nav-drawer" aria-hidden="true">
+  <button class="nav-drawer-close" id="nav-drawer-close" aria-label="Fermer">✕</button>
+  <a href="#bonjour" class="drawer-link">bonjour!</a>
+  <a href="#services" class="drawer-link">services</a>
+  <a href="#equipe" class="drawer-link">équipe</a>
+  <a href="#contact" class="drawer-link">contact</a>
+  <a href="https://calendly.com/mdlmentretien/30min" target="_blank" class="drawer-cta">Choisir votre créneau →</a>
 </nav>
 
 <!-- ── HERO ── -->
@@ -786,16 +891,6 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
   </div>
 </section>
 
-<!-- ── CHARACTERS (locked) ── -->
-<div style="position:absolute;top:0;left:0;width:0;height:0;overflow:visible;pointer-events:none;z-index:500">
-  <img src="chars/char1.svg" style="position:absolute;width:14.31vw;left:10.35vw;top:9.22vh;transform:rotate(-29deg);" draggable="false">
-  <img src="chars/char2.svg" style="position:absolute;width:17.22vw;left:66.94vw;top:564vh;" draggable="false">
-  <img src="chars/char3.svg" style="position:absolute;width:28.68vw;left:75.42vw;top:53.33vh;" draggable="false">
-  <img src="chars/char4.svg" style="position:absolute;width:17.36vw;left:53.82vw;top:293vh;" draggable="false">
-  <img src="chars/char5.svg" style="position:absolute;width:16.18vw;left:28.13vw;top:238.78vh;" draggable="false">
-  <img src="chars/char6.svg" style="position:absolute;width:14.86vw;left:10.76vw;top:675.89vh;transform:rotate(-7deg);" draggable="false">
-</div>
-</div>
 
 <script>
 // ── INFINITE CAROUSEL ──────────────────────────────────────
@@ -839,6 +934,94 @@ const obs = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
 document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+// ── HAMBURGER ──────────────────────────────────────────────
+(function(){
+  const btn = document.getElementById('nav-hamburger');
+  const drawer = document.getElementById('nav-drawer');
+  const closeBtn = document.getElementById('nav-drawer-close');
+  if (!btn || !drawer) return;
+
+  function openDrawer() {
+    drawer.classList.add('open');
+    drawer.setAttribute('aria-hidden','false');
+    btn.setAttribute('aria-expanded','true');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeDrawer() {
+    drawer.classList.remove('open');
+    drawer.setAttribute('aria-hidden','true');
+    btn.setAttribute('aria-expanded','false');
+    document.body.style.overflow = '';
+  }
+
+  btn.addEventListener('click', openDrawer);
+  closeBtn.addEventListener('click', closeDrawer);
+  drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', closeDrawer));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
+})();
+
+// ── CHARACTERS — bottom-anchored, ResizeObserver ──
+// All chars are square SVGs. size = wf × section_width.
+// bf (bottom fraction): char bottom stays at bf × section_height regardless of width.
+// Formula: top = bf×h − size  →  as width changes, size changes but bottom stays fixed.
+(function(){
+  const MAP = [
+    { sel:'.hero', chars:[
+      { src:'chars/char1.svg', lf:0.1035, bf:0.3212, wf:0.1431, rot:-29 },
+      { src:'chars/char3.svg', lf:0.7542, bf:0.9922, wf:0.2868, rot:0   }
+    ]},
+    { sel:'.s-service.s-blue', chars:[
+      { src:'chars/char5.svg', lf:0.2813, bf:0.6469, wf:0.1618, rot:0 },
+      { src:'chars/char4.svg', lf:0.5382, bf:1.2078, wf:0.1736, rot:0 }
+    ]},
+    { sel:'.s-contact', chars:[
+      { src:'chars/char2.svg', lf:0.06, bf:0.65, wf:0.1722, rot:0 }
+    ]},
+    { sel:'.s-carousel', chars:[
+      { src:'chars/char6.svg', lf:0.1076, bf:0.9588, wf:0.1486, rot:-7 }
+    ]}
+  ];
+
+  const mobile = () => window.innerWidth < 900;
+
+  MAP.forEach(({ sel, chars }) => {
+    const section = document.querySelector(sel);
+    if (!section) return;
+
+    const imgs = chars.map(c => {
+      const img = document.createElement('img');
+      img.src = c.src;
+      img.draggable = false;
+      img.className = 'char-img';
+      if (c.rot) img.style.transform = `rotate(${c.rot}deg)`;
+      section.appendChild(img);
+      return { img, lf:c.lf, bf:c.bf, wf:c.wf };
+    });
+
+    function place(w, h) {
+      const hidden = mobile();
+      imgs.forEach(({ img, lf, bf, wf }) => {
+        img.style.display = hidden ? 'none' : 'block';
+        if (!hidden) {
+          const size = wf * w;
+          img.style.left  = (lf * w) + 'px';
+          img.style.top   = (bf * h - size) + 'px';
+          img.style.width = size + 'px';
+        }
+      });
+    }
+
+    const ro = new ResizeObserver(() => {
+      const r = section.getBoundingClientRect();
+      place(r.width, r.height);
+    });
+    ro.observe(section);
+
+    const r = section.getBoundingClientRect();
+    place(r.width, r.height);
+  });
+})();
 
 </script>
 </body>
