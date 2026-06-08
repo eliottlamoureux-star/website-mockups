@@ -789,31 +789,14 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
 
 <!-- ── CHARACTERS (locked) ── -->
 <div class="chars-layer" style="position:absolute;top:0;left:0;width:0;height:0;overflow:visible;pointer-events:none;z-index:500">
-  <img src="chars/char1.svg" style="position:absolute;width:14.31vw;left:10.35vw;top:9.22vh;transform:rotate(-29deg);" draggable="false">
-  <img src="chars/char2.svg" style="position:absolute;width:17.22vw;left:66.94vw;top:564vh;" draggable="false">
-  <img src="chars/char3.svg" style="position:absolute;width:28.68vw;left:75.42vw;top:53.33vh;" draggable="false">
-  <img src="chars/char4.svg" style="position:absolute;width:17.36vw;left:53.82vw;top:293vh;" draggable="false">
-  <img src="chars/char5.svg" style="position:absolute;width:16.18vw;left:28.13vw;top:238.78vh;" draggable="false">
-  <img src="chars/char6.svg" style="position:absolute;width:14.86vw;left:10.76vw;top:675.89vh;transform:rotate(-7deg);" draggable="false">
+  <img src="chars/char1.svg" style="position:absolute;width:19.46vw;left:5.75vw;top:5.01vh;transform:rotate(-29deg);" draggable="false">
+  <img src="chars/char2.svg" style="position:absolute;width:17.21vw;left:65.17vw;top:611.00vh;" draggable="false">
+  <img src="chars/char3.svg" style="position:absolute;width:28.71vw;left:71.72vw;top:56.92vh;" draggable="false">
+  <img src="chars/char4.svg" style="position:absolute;width:17.35vw;left:52.72vw;top:316.33vh;" draggable="false">
+  <img src="chars/char5.svg" style="position:absolute;width:16.19vw;left:27.03vw;top:257.49vh;" draggable="false">
+  <img src="chars/char6.svg" style="position:absolute;width:16.53vw;left:8.76vw;top:727.43vh;transform:rotate(-7deg);" draggable="false">
 </div>
 
-<!-- ── DEBUG: copy char positions ── -->
-<button id="copy-pos-btn" onclick="(function(){
-  const imgs = document.querySelectorAll('.chars-layer img');
-  if(!imgs.length){alert('No chars found');return;}
-  let out = '';
-  imgs.forEach((img,i)=>{
-    const r = img.getBoundingClientRect();
-    const absTop = r.top + window.scrollY;
-    const src = img.src.split('/').pop();
-    out += src + '\n';
-    out += '  left: ' + (r.left/window.innerWidth*100).toFixed(2) + 'vw (' + r.left.toFixed(0) + 'px)\n';
-    out += '  top: ' + (absTop/window.innerHeight*100).toFixed(2) + 'vh (' + absTop.toFixed(0) + 'px)\n';
-    out += '  width: ' + (r.width/window.innerWidth*100).toFixed(2) + 'vw = ' + (r.width/window.innerHeight*100).toFixed(2) + 'vh (' + r.width.toFixed(0) + 'px)\n';
-    out += '  viewport: ' + window.innerWidth + 'x' + window.innerHeight + '\n\n';
-  });
-  navigator.clipboard.writeText(out).then(()=>alert('Positions copied!\n\n'+out)).catch(()=>alert(out));
-})()" style="position:fixed;bottom:20px;right:20px;z-index:9999;background:#EDFF47;color:#1E211E;border:none;padding:10px 18px;font-family:monospace;font-size:13px;font-weight:700;border-radius:8px;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,0.3);">📋 Copy Positions</button>
 
 <script>
 // ── INFINITE CAROUSEL ──────────────────────────────────────
