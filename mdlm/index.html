@@ -120,10 +120,12 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
 
 /* ── CHARACTERS — locked to their content element via container/em units (no JS, no aspect-ratio drift) ── */
 .deco{position:absolute;display:block;height:auto;pointer-events:none;z-index:6;user-select:none;-webkit-user-drag:none}
-/* card-anchored chars: card width is layout-set, so use container query units */
-.ritual-anchor{position:relative;container-type:inline-size;width:48%;max-width:560px;flex:0 0 auto}
-.ritual-anchor .ritual-card{width:100%;max-width:none}
-/* heading-anchored chars use em (relative to the heading's own font-size) — see nested .deco styles */
+/* content-anchored chars */
+.contact-card-grid{position:relative;container-type:inline-size}  /* grid is fixed-width on desktop → cqw locks char6 */
+.service-photo{position:relative}  /* char4/char5 use center-relative px against the fixed 460×520 card */
+/* structural-anchored chars (char2 gap, char3 seam) position against these */
+.carousel-header{position:relative}
+/* heading-anchored chars (char1) use em, relative to the heading's own font-size */
 
 /* ── HERO PHONE TAG ── */
 .hero-phone{
@@ -183,7 +185,7 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
   flex:0 0 auto;width:45%;
   display:flex;align-items:center;justify-content:center;
 }
-.service-photo img{
+.service-photo img:not(.deco){
   width:100%;max-width:460px;
   border-radius:20px;object-fit:cover;
   height:520px;
@@ -492,7 +494,8 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
 .carousel-swipe-hint{display:none}
 
 /* ── MOBILE ── */
-@media(max-width:900px){.deco{display:none}}
+/* characters only on full/maximized desktop screens — hidden on small windows, tablets, phones */
+@media(max-width:1200px){.deco{display:none}}
 @media(max-width:900px){
   .nav{padding:14px 20px}
   .nav-center{display:none}
@@ -505,7 +508,7 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
 
   /* Services */
   .s-service{flex-direction:column!important;padding:80px 24px 48px;justify-content:center;gap:32px}
-  .service-photo,.ritual-anchor,.ritual-card{width:100%;max-width:100%}
+  .service-photo,.ritual-card{width:100%;max-width:100%}
   .service-photo img{height:280px}
   .card-title{font-size:clamp(42px,12vw,72px)}
   .giant-text{font-size:clamp(72px,22vw,160px)}
@@ -603,8 +606,9 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
     <span>LA MAIN</span>
     <span>ENTRETIEN</span>
     <img src="chars/char1.svg" class="deco" style="width:1.43em;left:-1.058em;top:-1.113em;transform:rotate(-29deg)" alt="" draggable="false">
-    <img src="chars/char3.svg" class="deco" style="width:2.11em;left:3.79em;top:1.368em" alt="" draggable="false">
   </div>
+  <!-- char3 — straddles the hero→bonjour green/black seam (structural anchor) -->
+  <img src="chars/char3.svg" class="deco" style="width:28.71vw;right:-0.43vw;bottom:-0.69vw" alt="" draggable="false">
 </section>
 
 <!-- ── BONJOUR ── -->
@@ -619,8 +623,8 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
 <section class="s-service s-blue" id="services" data-nav-theme="dark">
   <div class="service-photo fade-up">
     <img src="ill-residential.svg" alt="Ménage résidentiel">
+    <img src="chars/char5.svg" class="deco" style="width:238px;left:calc(50% + 31px);top:300px" alt="" draggable="false">
   </div>
-  <div class="ritual-anchor">
   <div class="ritual-card fade-up">
     <div class="card-header">
       <div class="card-header-left">
@@ -662,16 +666,14 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
       </div>
     </div>
   </div>
-    <img src="chars/char5.svg" class="deco" style="width:42.5cqw;left:-80.12cqw;top:52.91cqw" alt="" draggable="false">
-  </div>
 </section>
 
 <!-- ── SERVICE 2 : COMMERCIAL ── -->
 <section class="s-service reverse s-yellow" id="svc-commercial" data-nav-theme="light">
   <div class="service-photo fade-up">
     <img src="ill-commercial.svg" alt="Ménage commercial">
+    <img src="chars/char4.svg" class="deco" style="width:255px;left:calc(50% - 329px);top:-94px" alt="" draggable="false">
   </div>
-  <div class="ritual-anchor">
   <div class="ritual-card fade-up">
     <div class="card-header">
       <div class="card-header-left">
@@ -714,8 +716,6 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
         </div>
       </div>
     </div>
-  </div>
-    <img src="chars/char4.svg" class="deco" style="width:45.54cqw;left:126.96cqw;top:-17.36cqw" alt="" draggable="false">
   </div>
 </section>
 
@@ -798,7 +798,8 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
 <section class="s-carousel" id="carousel" data-nav-theme="light">
   <div class="carousel-header">
     <span class="carousel-eyebrow fade-up">résultats</span>
-    <div class="carousel-title fade-up">AVANT / APRÈS<img src="chars/char2.svg" class="deco" style="width:2.151em;left:7.602em;top:-0.818em" alt="" draggable="false"></div>
+    <div class="carousel-title fade-up">AVANT / APRÈS</div>
+    <img src="chars/char2.svg" class="deco" style="width:220px;left:calc(50vw + 252px);top:-55px" alt="" draggable="false">
     <span class="carousel-swipe-hint fade-up">← glissez pour voir →</span>
   </div>
   <div class="carousel-overflow">
@@ -827,8 +828,9 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
 
 <!-- ── CONTACT ── -->
 <section class="s-contact" id="contact" data-nav-theme="light">
-  <div class="contact-heading fade-up">NOUS JOINDRE<img src="chars/char6.svg" class="deco" style="width:1.736em;left:-1.611em;top:0.131em;transform:rotate(-7deg)" alt="" draggable="false"></div>
+  <div class="contact-heading fade-up">NOUS JOINDRE</div>
   <div class="contact-card-grid">
+    <img src="chars/char6.svg" class="deco" style="width:30.37cqw;left:-25.78cqw;top:-16.1cqw;transform:rotate(-7deg)" alt="" draggable="false">
     <div class="contact-card fade-up">
       <span class="contact-card-label">Téléphone</span>
       <div class="contact-card-value">438-864-5176</div>
