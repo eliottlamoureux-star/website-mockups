@@ -102,7 +102,7 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
   min-height:100vh;
   background:#a8bca1;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
-  position:relative;overflow:hidden;
+  position:relative;overflow-x:clip;overflow-y:visible;
   padding:120px 20px 80px;
 }
 .hero-display{
@@ -117,6 +117,13 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
   text-shadow:0 4px 0 rgba(0,0,0,0.1);
 }
 .hero-display span{display:block}
+
+/* ── CHARACTERS — locked to their content element via container/em units (no JS, no aspect-ratio drift) ── */
+.deco{position:absolute;display:block;height:auto;pointer-events:none;z-index:6;user-select:none;-webkit-user-drag:none}
+/* card-anchored chars: card width is layout-set, so use container query units */
+.ritual-anchor{position:relative;container-type:inline-size;width:48%;max-width:560px;flex:0 0 auto}
+.ritual-anchor .ritual-card{width:100%;max-width:none}
+/* heading-anchored chars use em (relative to the heading's own font-size) — see nested .deco styles */
 
 /* ── HERO PHONE TAG ── */
 .hero-phone{
@@ -161,7 +168,7 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
 .s-service{
   min-height:100vh;
   display:flex;align-items:center;justify-content:space-between;
-  position:relative;overflow:hidden;
+  position:relative;overflow-x:clip;overflow-y:visible;
   padding:80px 64px;
   gap:48px;
 }
@@ -300,7 +307,7 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
 .s-carousel{
   background:#f5f1e8;
   padding:100px 0 80px;
-  overflow:hidden;
+  overflow-x:clip;overflow-y:visible;
 }
 .carousel-header{padding:0 64px;margin-bottom:48px;text-align:left}
 .carousel-eyebrow{
@@ -312,6 +319,7 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
   font-family:'Boogaloo',cursive;
   font-size:clamp(52px,8vw,120px);
   color:#1E211E;line-height:0.88;letter-spacing:-0.01em;
+  display:inline-block;position:relative;
 }
 .carousel-overflow{overflow:hidden;padding:40px 0 60px}
 .carousel-track{
@@ -375,8 +383,8 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
 .contact-heading{
   font-family:'Boogaloo',cursive;
   font-size:clamp(60px,10vw,140px);
-  color:#1E211E;line-height:0.88;letter-spacing:-0.01em;
-  text-align:center;margin-bottom:56px;opacity:0.85;
+  color:rgba(30,33,30,0.85);line-height:0.88;letter-spacing:-0.01em;
+  text-align:center;margin-bottom:56px;position:relative;
 }
 .contact-card-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;max-width:800px;width:100%}
 .contact-card{background:#1E211E;border-radius:16px;padding:28px 32px}
@@ -484,7 +492,7 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
 .carousel-swipe-hint{display:none}
 
 /* ── MOBILE ── */
-@media(max-width:900px){.chars-layer{display:none}}
+@media(max-width:900px){.deco{display:none}}
 @media(max-width:900px){
   .nav{padding:14px 20px}
   .nav-center{display:none}
@@ -497,7 +505,7 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
 
   /* Services */
   .s-service{flex-direction:column!important;padding:80px 24px 48px;justify-content:center;gap:32px}
-  .service-photo,.ritual-card{width:100%;max-width:100%}
+  .service-photo,.ritual-anchor,.ritual-card{width:100%;max-width:100%}
   .service-photo img{height:280px}
   .card-title{font-size:clamp(42px,12vw,72px)}
   .giant-text{font-size:clamp(72px,22vw,160px)}
@@ -594,6 +602,8 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
     <span>MAIN DANS</span>
     <span>LA MAIN</span>
     <span>ENTRETIEN</span>
+    <img src="chars/char1.svg" class="deco" style="width:1.43em;left:-1.058em;top:-1.113em;transform:rotate(-29deg)" alt="" draggable="false">
+    <img src="chars/char3.svg" class="deco" style="width:2.11em;left:3.79em;top:1.368em" alt="" draggable="false">
   </div>
 </section>
 
@@ -610,6 +620,7 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
   <div class="service-photo fade-up">
     <img src="ill-residential.svg" alt="Ménage résidentiel">
   </div>
+  <div class="ritual-anchor">
   <div class="ritual-card fade-up">
     <div class="card-header">
       <div class="card-header-left">
@@ -651,6 +662,8 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
       </div>
     </div>
   </div>
+    <img src="chars/char5.svg" class="deco" style="width:42.5cqw;left:-80.12cqw;top:52.91cqw" alt="" draggable="false">
+  </div>
 </section>
 
 <!-- ── SERVICE 2 : COMMERCIAL ── -->
@@ -658,6 +671,7 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
   <div class="service-photo fade-up">
     <img src="ill-commercial.svg" alt="Ménage commercial">
   </div>
+  <div class="ritual-anchor">
   <div class="ritual-card fade-up">
     <div class="card-header">
       <div class="card-header-left">
@@ -700,6 +714,8 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
         </div>
       </div>
     </div>
+  </div>
+    <img src="chars/char4.svg" class="deco" style="width:45.54cqw;left:126.96cqw;top:-17.36cqw" alt="" draggable="false">
   </div>
 </section>
 
@@ -782,7 +798,7 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
 <section class="s-carousel" id="carousel" data-nav-theme="light">
   <div class="carousel-header">
     <span class="carousel-eyebrow fade-up">résultats</span>
-    <div class="carousel-title fade-up">AVANT / APRÈS</div>
+    <div class="carousel-title fade-up">AVANT / APRÈS<img src="chars/char2.svg" class="deco" style="width:2.151em;left:7.602em;top:-0.818em" alt="" draggable="false"></div>
     <span class="carousel-swipe-hint fade-up">← glissez pour voir →</span>
   </div>
   <div class="carousel-overflow">
@@ -811,7 +827,7 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
 
 <!-- ── CONTACT ── -->
 <section class="s-contact" id="contact" data-nav-theme="light">
-  <div class="contact-heading fade-up">NOUS JOINDRE</div>
+  <div class="contact-heading fade-up">NOUS JOINDRE<img src="chars/char6.svg" class="deco" style="width:1.736em;left:-1.611em;top:0.131em;transform:rotate(-7deg)" alt="" draggable="false"></div>
   <div class="contact-card-grid">
     <div class="contact-card fade-up">
       <span class="contact-card-label">Téléphone</span>
@@ -878,17 +894,7 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
   </div>
 </section>
 
-<!-- ── CHARACTERS (anchored to their section — never drift) ── -->
-<!-- data-anchor = section id · data-left/data-top = % within that section (captured @1440×900) -->
-<div class="chars-layer" style="position:absolute;top:0;left:0;width:0;height:0;overflow:visible;pointer-events:none;z-index:500">
-  <img src="chars/char1.svg" data-anchor="hero"          data-left="5.75"  data-top="5.01" style="position:absolute;width:19.46vw;transform:rotate(-29deg);opacity:0" draggable="false">
-  <img src="chars/char3.svg" data-anchor="hero"          data-left="71.72" data-top="56.92" style="position:absolute;width:28.71vw;opacity:0" draggable="false">
-  <img src="chars/char5.svg" data-anchor="services"      data-left="27.03" data-top="57.49" style="position:absolute;width:16.19vw;opacity:0" draggable="false">
-  <img src="chars/char4.svg" data-anchor="svc-commercial" data-left="52.72" data-top="16.33" style="position:absolute;width:17.35vw;opacity:0" draggable="false">
-  <img src="chars/char2.svg" data-anchor="carousel"      data-left="65.17" data-top="7.00"  style="position:absolute;width:17.21vw;opacity:0" draggable="false">
-  <img src="chars/char6.svg" data-anchor="contact"       data-left="8.76"  data-top="22.00" style="position:absolute;width:16.53vw;transform:rotate(-7deg);opacity:0" draggable="false">
-</div>
-
+<!-- Characters are now nested inside their content elements (see each section) — locked via container/em units, no JS. -->
 
 <script>
 // ── INFINITE CAROUSEL ──────────────────────────────────────
@@ -928,39 +934,6 @@ function updateNavTheme() {
 }
 window.addEventListener('scroll', updateNavTheme, { passive: true });
 updateNavTheme();
-
-// ── CHAR SECTION ANCHOR ────────────────────────────────────
-// Each char is pinned to its host SECTION (not to a fixed viewport coord),
-// so it tracks the content at every screen size — no drift, ever.
-//   x = section.left + data-left% × section.width
-//   y = section.top  + data-top%  × section.height   (document coords)
-(function () {
-  var chars = Array.from(document.querySelectorAll('.chars-layer img'));
-  var rafId = null;
-
-  function place() {
-    rafId = null;
-    chars.forEach(function (img) {
-      var sec = document.getElementById(img.dataset.anchor);
-      if (!sec) return;
-      var r = sec.getBoundingClientRect();
-      var top = r.top + window.scrollY;
-      var w = sec.offsetWidth, h = sec.offsetHeight;
-      img.style.left = (r.left + window.scrollX + parseFloat(img.dataset.left) / 100 * w) + 'px';
-      img.style.top  = (top + parseFloat(img.dataset.top) / 100 * h) + 'px';
-      img.style.opacity = '1';
-    });
-  }
-  function schedule() {
-    if (rafId) cancelAnimationFrame(rafId);
-    rafId = requestAnimationFrame(place);
-  }
-
-  place();
-  window.addEventListener('load', place);
-  window.addEventListener('resize', schedule, { passive: true });
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(place);
-})();
 
 // ── FADE UP ────────────────────────────────────────────────
 const obs = new IntersectionObserver(entries => {
