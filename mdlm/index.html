@@ -118,6 +118,19 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
 }
 .hero-display span{display:block}
 
+/* ── HERO PHONE TAG ── */
+.hero-phone{
+  display:inline-flex;align-items:center;gap:10px;
+  background:#1E211E;border-radius:100px;
+  padding:9px 22px;margin-bottom:30px;
+  position:relative;z-index:2;
+  font-family:'DM Mono',monospace;
+  box-shadow:0 6px 24px rgba(30,33,30,0.18);
+}
+.hero-phone .hp-label{font-size:12px;color:rgba(255,255,255,0.55);letter-spacing:0.06em}
+.hero-phone .hp-sep{color:rgba(255,255,255,0.3);font-size:12px}
+.hero-phone .hp-num{font-family:'Space Mono',monospace;font-size:14px;font-weight:700;color:#fff;letter-spacing:0.04em}
+
 /* ── BONJOUR SECTION ── */
 .s-dark{
   background:#1E211E;
@@ -566,6 +579,11 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
 
 <!-- ── HERO ── -->
 <section class="hero" id="hero" data-nav-theme="dark">
+  <div class="hero-phone">
+    <span class="hp-label">Appelez-nous</span>
+    <span class="hp-sep">·</span>
+    <span class="hp-num">438-864-5176</span>
+  </div>
   <div class="hero-display">
     <span>MAIN DANS</span>
     <span>LA MAIN</span>
