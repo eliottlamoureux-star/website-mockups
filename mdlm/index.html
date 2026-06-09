@@ -837,61 +837,30 @@ updateNavTheme();
 
 // ── CHAR BOTTOM ANCHOR ─────────────────────────────────────
 // Full screen: chars keep exact CSS — style.top never touched at load.
-// On resize: per-frame rAF locks BOTTOM edge of each char to its section.
-//   top = sectionTop + bottomOffset - currentWidth
-//   → bottom = sectionTop + bottomOffset (constant regardless of width or reflow)
+// On resize: per-frame rAF locks BOTTOM edge to its calibration position.
+//   bottom_px = topVH * origH/100 + widthVW * origW/100  (constant)
+//   top = bottom_px - widthVW * currentW/100
 (function () {
-  var chars       = Array.from(document.querySelectorAll('.chars-layer img'));
-  var allSections = Array.from(document.querySelectorAll('section'));
-  var anchors     = [];
-  var rafId       = null;
-
-  var origTopVH   = new WeakMap();
+  var chars      = Array.from(document.querySelectorAll('.chars-layer img'));
+  var origTopVH  = new WeakMap();
   var origWidthVW = new WeakMap();
+  var origW      = window.innerWidth;
+  var origH      = window.innerHeight;
+  var rafId      = null;
+
   chars.forEach(function (img) {
     origTopVH.set(img,   parseFloat(img.style.top));
     origWidthVW.set(img, parseFloat(img.style.width));
   });
 
-  function buildAnchors() {
-    anchors = [];
-    var H = window.innerHeight;
-    var W = window.innerWidth;
-    var secTops = allSections.map(function (sec) {
-      return { sec: sec, top: sec.getBoundingClientRect().top + window.scrollY };
-    });
-    chars.forEach(function (img) {
-      var topVH    = origTopVH.get(img);
-      var widthVW  = origWidthVW.get(img);
-      var bottomPx = topVH * H / 100 + widthVW * W / 100;
-      var matched  = secTops[0];
-      for (var i = 0; i < secTops.length; i++) {
-        var entry  = secTops[i];
-        var secBot = entry.top + allSections[i].offsetHeight;
-        if (bottomPx >= entry.top && bottomPx <= secBot) { matched = entry; break; }
-      }
-      var best = matched, bestDist = Infinity;
-      secTops.forEach(function (entry) {
-        var d = bottomPx - entry.top;
-        if (d >= 0 && d < bestDist) { bestDist = d; best = entry; }
-      });
-      anchors.push({ img: img, section: best.sec, widthVW: widthVW, offsetBottomPx: bottomPx - best.top });
-    });
-  }
-
   function applyAnchors() {
     rafId = null;
     var W = window.innerWidth;
-    var secTopMap = new Map();
-    anchors.forEach(function (a) {
-      if (!secTopMap.has(a.section)) {
-        secTopMap.set(a.section, a.section.getBoundingClientRect().top + window.scrollY);
-      }
-    });
-    anchors.forEach(function (a) {
-      var secDocTop = secTopMap.get(a.section);
-      var charWidth = a.widthVW * W / 100;
-      a.img.style.top = (secDocTop + a.offsetBottomPx - charWidth) + 'px';
+    chars.forEach(function (img) {
+      var topVH   = origTopVH.get(img);
+      var widthVW = origWidthVW.get(img);
+      var bottomPx = topVH * origH / 100 + widthVW * origW / 100;
+      img.style.top = (bottomPx - widthVW * W / 100) + 'px';
     });
   }
 
@@ -899,17 +868,6 @@ updateNavTheme();
     if (rafId) cancelAnimationFrame(rafId);
     rafId = requestAnimationFrame(applyAnchors);
   }, { passive: true });
-
-  window.addEventListener('load', function () {
-    requestAnimationFrame(function () {
-      requestAnimationFrame(function () {
-        buildAnchors();
-        if (document.fonts && document.fonts.ready) {
-          document.fonts.ready.then(buildAnchors);
-        }
-      });
-    });
-  });
 })();
 
 // ── FADE UP ────────────────────────────────────────────────
