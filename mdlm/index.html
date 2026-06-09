@@ -453,6 +453,9 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
 .fade-up.visible{opacity:1;transform:translateY(0)}
 
 
+/* ── SWIPE HINT (mobile only) ── */
+.carousel-swipe-hint{display:none}
+
 /* ── MOBILE ── */
 @media(max-width:900px){.chars-layer{display:none}}
 @media(max-width:900px){
@@ -460,20 +463,74 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
   .nav-center{display:none}
   .hero-display{font-size:clamp(56px,16vw,120px)}
   .hero-photo-wrap{width:320px}
+
+  /* Bonjour */
+  .s-dark{padding:80px 24px}
+  .giant-sub{font-size:15px;line-height:1.65;margin-top:24px;max-width:100%}
+
+  /* Services */
   .s-service{flex-direction:column!important;padding:80px 24px 48px;justify-content:center;gap:32px}
   .service-photo,.ritual-card{width:100%;max-width:100%}
   .service-photo img{height:280px}
   .card-title{font-size:clamp(42px,12vw,72px)}
   .giant-text{font-size:clamp(72px,22vw,160px)}
+
+  /* Team — stack to single column */
+  .team-layout{grid-template-columns:1fr;gap:32px}
+  .team-photo-col img{height:auto;max-height:480px;object-position:center center}
+  .team-text-col{gap:16px}
   .team-title{font-size:clamp(48px,14vw,100px)}
+  .team-story{font-size:14px;line-height:1.7}
+  .team-values{justify-content:flex-start;gap:14px 22px}
+
+  /* Carousel — swipe instead of auto-scroll */
+  .s-carousel{padding:80px 0 60px}
+  .carousel-header{padding:0 24px;margin-bottom:20px}
+  .carousel-swipe-hint{
+    display:block;margin-top:12px;
+    font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.18em;
+    color:rgba(30,33,30,0.4);text-transform:uppercase;
+  }
+  .carousel-overflow{
+    overflow-x:auto;overflow-y:hidden;
+    -webkit-overflow-scrolling:touch;
+    scroll-snap-type:x mandatory;
+    padding:24px 24px 40px;
+    scrollbar-width:none;
+  }
+  .carousel-overflow::-webkit-scrollbar{display:none}
+  .carousel-track{
+    gap:16px;
+    transform:none!important;
+  }
+  .carousel-card{
+    flex:0 0 78vw;height:380px;
+    margin-right:0;margin-top:0!important;
+    transform:none!important;
+    scroll-snap-align:center;
+  }
+  /* Hide the duplicate loop set — irrelevant for manual swipe */
+  .carousel-track .carousel-card:nth-child(n+9){display:none}
+
+  /* Contact */
   .contact-card-grid{grid-template-columns:1fr}
   .contact-card.wide{grid-column:1}
   .form-row{grid-template-columns:1fr}
   .s-contact,.s-team,.s-cta{padding:80px 24px}
+
+  /* CTA / Footer */
   .cta-display{font-size:clamp(56px,16vw,120px)}
   .footer-grid{grid-template-columns:1fr 1fr;gap:32px}
   .footer-bottom{flex-direction:column;gap:16px;text-align:center}
   .footer-legal{justify-content:center}
+}
+
+/* ── SMALL PHONES ── */
+@media(max-width:480px){
+  .nav{padding:12px 16px}
+  .nav-label{display:none}
+  .nav-cta{font-size:10px;padding:8px 12px}
+  .carousel-card{flex:0 0 82vw;height:340px}
 }
 </style>
 </head>
@@ -693,6 +750,7 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
   <div class="carousel-header">
     <span class="carousel-eyebrow fade-up">résultats</span>
     <div class="carousel-title fade-up">AVANT / APRÈS</div>
+    <span class="carousel-swipe-hint fade-up">← glissez pour voir →</span>
   </div>
   <div class="carousel-overflow">
     <div class="carousel-track">
@@ -801,6 +859,8 @@ body{font-family:'DM Mono',monospace;background:#1E211E;color:#1E211E;overflow-x
 <script>
 // ── INFINITE CAROUSEL ──────────────────────────────────────
 (function(){
+  // Skip auto-scroll on mobile — CSS scroll-snap handles swipe instead
+  if (window.matchMedia('(max-width:900px)').matches) return;
   const track = document.querySelector('.carousel-track');
   if (!track) return;
   let pos = 0;
@@ -834,6 +894,41 @@ function updateNavTheme() {
 }
 window.addEventListener('scroll', updateNavTheme, { passive: true });
 updateNavTheme();
+
+// ── CHAR BOTTOM ANCHOR ─────────────────────────────────────
+// Full screen: chars keep exact CSS — style.top never touched at load.
+// On resize: per-frame rAF locks BOTTOM edge to its calibration position.
+//   bottom_px = topVH * origH/100 + widthVW * origW/100  (constant)
+//   top = bottom_px - widthVW * currentW/100
+(function () {
+  var chars      = Array.from(document.querySelectorAll('.chars-layer img'));
+  var origTopVH  = new WeakMap();
+  var origWidthVW = new WeakMap();
+  var origW      = window.innerWidth;
+  var origH      = window.innerHeight;
+  var rafId      = null;
+
+  chars.forEach(function (img) {
+    origTopVH.set(img,   parseFloat(img.style.top));
+    origWidthVW.set(img, parseFloat(img.style.width));
+  });
+
+  function applyAnchors() {
+    rafId = null;
+    var W = window.innerWidth;
+    chars.forEach(function (img) {
+      var topVH   = origTopVH.get(img);
+      var widthVW = origWidthVW.get(img);
+      var bottomPx = topVH * origH / 100 + widthVW * origW / 100;
+      img.style.top = (bottomPx - widthVW * W / 100) + 'px';
+    });
+  }
+
+  window.addEventListener('resize', function () {
+    if (rafId) cancelAnimationFrame(rafId);
+    rafId = requestAnimationFrame(applyAnchors);
+  }, { passive: true });
+})();
 
 // ── FADE UP ────────────────────────────────────────────────
 const obs = new IntersectionObserver(entries => {
