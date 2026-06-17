@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Constructions NovaVie — Maquettes de site (3 directions)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#171513;--gold:#c2a15c;--cream:#f6f3ec;--sand:#cfc4ad;--muted:#9a9082;--line:rgba(246,243,236,.12)}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#13110f;color:var(--cream);font-family:'Inter',system-ui,sans-serif;font-weight:300;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1180px;margin:0 auto;padding:64px 28px 90px}
+  .top{display:flex;align-items:center;gap:16px;margin-bottom:8px}
+  .mark{width:170px;height:54px;-webkit-mask:url(novavie-assets/logo-light.svg) left center/contain no-repeat;mask:url(novavie-assets/logo-light.svg) left center/contain no-repeat;background:var(--cream)}
+  .eyebrow{font-weight:500;font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold)}
+  h1{font-family:'Fraunces',serif;font-weight:300;font-size:clamp(2rem,4vw,3rem);margin:22px 0 10px;letter-spacing:-.01em}
+  h1 em{font-style:italic;color:var(--gold)}
+  .lede{color:var(--muted);max-width:620px;line-height:1.6}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:50px}
+  .card{background:#1d1916;border:1px solid var(--line);border-radius:4px;overflow:hidden;transition:.35s;text-decoration:none;color:inherit;display:flex;flex-direction:column}
+  .card:hover{transform:translateY(-6px);border-color:var(--gold)}
+  .thumb{aspect-ratio:1440/900;background:#0f0d0c center/cover no-repeat;border-bottom:1px solid var(--line)}
+  .meta{padding:22px 22px 26px}
+  .meta .n{font-family:'Fraunces',serif;font-style:italic;color:var(--gold);font-size:1rem}
+  .meta h2{font-family:'Fraunces',serif;font-weight:400;font-size:1.45rem;margin:6px 0 8px}
+  .meta p{color:var(--muted);font-size:.9rem;line-height:1.55}
+  .open{display:inline-flex;align-items:center;gap:.5em;margin-top:16px;color:var(--gold);font-size:.85rem;font-weight:500;letter-spacing:.03em}
+  .note{margin-top:54px;padding-top:28px;border-top:1px solid var(--line);color:var(--muted);font-size:.86rem;line-height:1.7;max-width:760px}
+  .note b{color:var(--sand);font-weight:500}
+  @media(max-width:820px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><span class="mark" aria-label="Constructions NovaVie"></span></div>
+  <span class="eyebrow">Maquettes de site · 3 directions visuelles</span>
+  <h1>Le même message. Trois <em>ambiances.</em></h1>
+  <p class="lede">Rénovation résidentielle clé en main dans les Cantons-de-l'Est. Chaque direction raconte la même histoire — « on ne rénove pas des maisons, on bâtit l'endroit où votre vie se passe » — avec une personnalité différente. Choisissez celle qui vous ressemble.</p>
+
+  <div class="grid">
+    <a class="card" href="novavie-cinematique.html">
+      <div class="thumb" style="background-image:url(novavie-assets/thumb-cinematique.png)"></div>
+      <div class="meta"><span class="n">Direction 01</span><h2>Cinématique</h2>
+        <p>Sombre, immersive, émotive. Grand serif, accents or, storytelling au défilement. L'ambiance « expérience » — la plus proche de Radian.</p>
+        <span class="open">Ouvrir la maquette →</span></div>
+    </a>
+    <a class="card" href="novavie-editorial.html">
+      <div class="thumb" style="background-image:url(novavie-assets/thumb-editorial.png)"></div>
+      <div class="meta"><span class="n">Direction 02</span><h2>Éditorial chaleureux</h2>
+        <p>Clair, chaud, magazine haut de gamme. Beaucoup d'espace, les personnages au trait en vedette. Humain et accueillant.</p>
+        <span class="open">Ouvrir la maquette →</span></div>
+    </a>
+    <a class="card" href="novavie-architectural.html">
+      <div class="thumb" style="background-image:url(novavie-assets/thumb-architectural.png)"></div>
+      <div class="meta"><span class="n">Direction 03</span><h2>Architectural / structuré</h2>
+        <p>Grille suisse, typo affirmée, repères techniques. Met l'accent sur le processus : « on conçoit ET on bâtit. »</p>
+        <span class="open">Ouvrir la maquette →</span></div>
+    </a>
+  </div>
+
+  <p class="note">
+    <b>À savoir :</b> contenu en français, secteur Cantons-de-l'Est, finition résidentielle clé en main.
+    Les 8 services, le parcours « main dans la main » en 4 étapes, et les blocs « expérience » vendent le ressenti, pas le placoplâtre.
+    Les <b>réalisations</b> utilisent des cadres « Photo projet — à venir » : envoyez vos photos avant/après et chaque cadre se remplace en une ligne.
+    Logo et personnages au trait <b>vectorisés</b> (SVG). Code 100 % original.
+  </p>
+</div>
+</body>
+</html>

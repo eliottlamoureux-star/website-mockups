@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Constructions NovaVie — L'endroit où votre vie prend forme</title>
+<meta name="description" content="Rénovation résidentielle clé en main dans les Cantons-de-l'Est. Cuisines, salles de bain, sous-sols — des plans à la dernière plinthe, main dans la main.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#171513; --ink2:#211d1a; --panel:#1d1916;
+    --gold:#c2a15c; --gold-deep:#b6914b; --cream:#f6f3ec; --sand:#cfc4ad;
+    --muted:#9a9082; --line:rgba(246,243,236,.12);
+    --serif:'Fraunces',Georgia,serif; --sans:'Inter',system-ui,sans-serif;
+    --maxw:1240px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--ink);color:var(--cream);font-family:var(--sans);font-weight:300;
+    line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+  h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.05;letter-spacing:-.01em}
+  a{color:inherit;text-decoration:none}
+  .eyebrow{font-family:var(--sans);font-weight:500;font-size:.72rem;letter-spacing:.28em;
+    text-transform:uppercase;color:var(--gold)}
+  .btn{display:inline-flex;align-items:center;gap:.6em;font-family:var(--sans);font-weight:500;
+    font-size:.92rem;letter-spacing:.02em;padding:1.05em 1.9em;border-radius:2px;
+    background:var(--gold);color:var(--ink);border:1px solid var(--gold);cursor:pointer;
+    transition:.35s ease}
+  .btn:hover{background:transparent;color:var(--gold)}
+  .btn--ghost{background:transparent;color:var(--cream);border-color:var(--line)}
+  .btn--ghost:hover{border-color:var(--gold);color:var(--gold)}
+
+  /* ---------- NAV ---------- */
+  header{position:fixed;top:0;left:0;right:0;z-index:50;transition:.4s ease;
+    border-bottom:1px solid transparent}
+  header.scrolled{background:rgba(23,21,19,.86);backdrop-filter:blur(14px);border-bottom-color:var(--line)}
+  nav{display:flex;align-items:center;justify-content:space-between;height:84px}
+  .brand{display:flex;align-items:center;gap:12px}
+  .brand .mark{width:148px;height:46px;
+    -webkit-mask:url(novavie-assets/logo-light.svg) left center/contain no-repeat;
+    mask:url(novavie-assets/logo-light.svg) left center/contain no-repeat;background:var(--cream)}
+  .navlinks{display:flex;gap:34px;align-items:center}
+  .navlinks a{font-size:.88rem;font-weight:400;color:var(--sand);letter-spacing:.02em;position:relative}
+  .navlinks a::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:1px;
+    background:var(--gold);transition:.3s}
+  .navlinks a:hover{color:var(--cream)} .navlinks a:hover::after{width:100%}
+  .navlinks .btn{padding:.8em 1.5em}
+  .menu-toggle{display:none;background:none;border:0;color:var(--cream);font-size:1.6rem;cursor:pointer}
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative;min-height:100vh;display:flex;align-items:center;
+    background:radial-gradient(120% 90% at 75% 15%,#2a2420 0%,#171513 55%,#100e0c 100%);
+    overflow:hidden}
+  .hero::before{content:"";position:absolute;inset:0;
+    background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cpath d='M0 0h40v40H0z' fill='none' stroke='%23f6f3ec' stroke-opacity='.03'/%3E%3C/svg%3E");
+    opacity:.5}
+  .hero .glow{position:absolute;width:60vw;height:60vw;right:-10vw;top:-12vw;border-radius:50%;
+    background:radial-gradient(circle,rgba(194,161,92,.16),transparent 62%);filter:blur(8px)}
+  .hero-char{position:absolute;right:-2%;bottom:0;width:min(46vw,640px);aspect-ratio:1568/920;
+    -webkit-mask:url(novavie-assets/team.svg) right bottom/contain no-repeat;
+    mask:url(novavie-assets/team.svg) right bottom/contain no-repeat;
+    background:linear-gradient(180deg,var(--gold),rgba(194,161,92,.25));opacity:.85}
+  .hero-inner{position:relative;z-index:2;max-width:760px;padding-top:60px}
+  .hero h1{font-size:clamp(2.9rem,7vw,5.7rem);margin:.28em 0 .42em;font-weight:300}
+  .hero h1 em{font-style:italic;color:var(--gold)}
+  .hero p{font-size:clamp(1.05rem,1.6vw,1.25rem);color:var(--sand);max-width:540px;font-weight:300}
+  .hero-cta{display:flex;gap:16px;margin-top:38px;flex-wrap:wrap}
+  .scrollcue{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);z-index:2;
+    font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;color:var(--muted);
+    display:flex;flex-direction:column;align-items:center;gap:10px}
+  .scrollcue span{width:1px;height:42px;background:linear-gradient(var(--gold),transparent);animation:cue 2.4s infinite}
+  @keyframes cue{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}
+    51%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+  /* ---------- reveal ---------- */
+  .reveal{opacity:0;transform:translateY(34px);transition:.9s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  /* ---------- MANIFESTE ---------- */
+  .manifeste{padding:140px 0;text-align:center;border-top:1px solid var(--line)}
+  .manifeste p{font-family:var(--serif);font-size:clamp(1.6rem,3.4vw,2.7rem);line-height:1.32;
+    max-width:980px;margin:24px auto 0;font-weight:300}
+  .manifeste p b{color:var(--gold);font-weight:400}
+
+  /* ---------- SERVICES ---------- */
+  .section{padding:120px 0}
+  .sec-head{max-width:620px;margin-bottom:56px}
+  .sec-head h2{font-size:clamp(2rem,4vw,3.1rem);margin:.3em 0;font-weight:300}
+  .sec-head p{color:var(--muted)}
+  .svc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);
+    border:1px solid var(--line)}
+  .svc{background:var(--ink);padding:38px 30px;transition:.4s;min-height:210px;display:flex;
+    flex-direction:column;justify-content:space-between}
+  .svc:hover{background:var(--ink2)}
+  .svc svg{width:34px;height:34px;stroke:var(--gold);fill:none;stroke-width:1.4;
+    stroke-linecap:round;stroke-linejoin:round;transition:.4s}
+  .svc:hover svg{transform:translateY(-4px)}
+  .svc h3{font-size:1.25rem;margin-top:26px;font-weight:400}
+  .svc small{color:var(--muted);font-size:.86rem;display:block;margin-top:6px;line-height:1.5}
+
+  /* ---------- ACCOMPAGNEMENT ---------- */
+  .accomp{background:linear-gradient(180deg,#171513,#1b1714);border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line)}
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:34px;margin-top:20px}
+  .step{position:relative;padding-top:34px;border-top:2px solid var(--line)}
+  .step.active-line{border-top-color:var(--gold)}
+  .step .num{font-family:var(--serif);font-size:2.4rem;color:var(--gold);font-style:italic;line-height:1}
+  .step h3{font-size:1.3rem;margin:14px 0 10px;font-weight:400}
+  .step p{color:var(--muted);font-size:.92rem}
+  .accomp-art{display:flex;gap:40px;align-items:center;margin-top:80px;flex-wrap:wrap}
+  .accomp-art .char{flex:1;min-width:280px;height:230px;
+    -webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
+    -webkit-mask-position:center;mask-position:center;background:var(--sand);opacity:.9}
+  .char-handshake{-webkit-mask-image:url(novavie-assets/handshake.svg);mask-image:url(novavie-assets/handshake.svg)}
+  .char-planning{-webkit-mask-image:url(novavie-assets/planning.svg);mask-image:url(novavie-assets/planning.svg)}
+
+  /* ---------- EXPERIENCE ---------- */
+  .exp{display:grid;grid-template-columns:1fr 1fr;min-height:520px}
+  .exp:nth-child(even) .exp-txt{order:2}
+  .exp-media{position:relative;background:var(--panel);overflow:hidden;display:flex;
+    align-items:flex-end;justify-content:center;border:1px solid var(--line)}
+  .exp-media .char{position:absolute;inset:0;background:rgba(194,161,92,.4);
+    -webkit-mask-size:78%;mask-size:78%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
+    -webkit-mask-position:center;mask-position:center}
+  .exp-media .ph{position:absolute;bottom:18px;left:18px;font-size:.7rem;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--muted);background:rgba(0,0,0,.4);padding:6px 12px;border:1px solid var(--line)}
+  .exp-txt{display:flex;flex-direction:column;justify-content:center;padding:80px 70px;background:var(--ink2)}
+  .exp-txt .eyebrow{margin-bottom:18px}
+  .exp-txt h3{font-size:clamp(1.8rem,3vw,2.6rem);font-weight:300;line-height:1.18}
+  .exp-txt p{color:var(--muted);margin-top:18px;max-width:440px}
+
+  /* ---------- PORTFOLIO ---------- */
+  .pf-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:20px}
+  .pf{position:relative;aspect-ratio:4/3;background:
+      linear-gradient(135deg,#241f1b,#171513);border:1px solid var(--line);overflow:hidden;
+      display:flex;align-items:center;justify-content:center;cursor:pointer;transition:.4s}
+  .pf:hover{border-color:var(--gold)}
+  .pf .tag{position:absolute;top:16px;left:16px;font-size:.72rem;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--gold);border:1px solid var(--line);padding:5px 10px;background:rgba(0,0,0,.35)}
+  .pf .ph{font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);text-align:center;padding:0 20px}
+  .pf .loc{position:absolute;bottom:16px;left:16px;font-family:var(--serif);font-size:1.15rem;color:var(--cream)}
+  .pf-note{margin-top:22px;font-size:.85rem;color:var(--muted)}
+
+  /* ---------- WHY ---------- */
+  .why{background:#13110f}
+  .why-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0}
+  .why-item{padding:46px 40px;border-top:1px solid var(--line)}
+  .why-item:nth-child(odd){border-right:1px solid var(--line)}
+  .why-item .n{font-family:var(--serif);font-style:italic;color:var(--gold);font-size:1.1rem}
+  .why-item h3{font-size:1.4rem;margin:12px 0 8px;font-weight:400}
+  .why-item p{color:var(--muted);font-size:.94rem}
+
+  /* ---------- QUOTE ---------- */
+  .quote{padding:150px 0;text-align:center}
+  .quote blockquote{font-family:var(--serif);font-size:clamp(1.5rem,3vw,2.4rem);font-weight:300;
+    font-style:italic;max-width:920px;margin:0 auto;line-height:1.4}
+  .quote cite{display:block;margin-top:30px;font-family:var(--sans);font-style:normal;
+    font-size:.85rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+
+  /* ---------- CTA / CONTACT ---------- */
+  .cta{background:linear-gradient(180deg,#1d1916,#13110f);border-top:1px solid var(--line)}
+  .cta-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
+  .cta h2{font-size:clamp(2.2rem,4.5vw,3.4rem);font-weight:300}
+  .cta p{color:var(--muted);margin-top:18px;max-width:420px}
+  form{display:grid;gap:16px}
+  .frow{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  input,select,textarea{width:100%;background:transparent;border:1px solid var(--line);
+    color:var(--cream);padding:1em 1.1em;font-family:var(--sans);font-size:.95rem;border-radius:2px}
+  input::placeholder,textarea::placeholder{color:var(--muted)}
+  input:focus,select,textarea:focus{outline:none;border-color:var(--gold)}
+  select{color:var(--sand)}
+  textarea{min-height:110px;resize:vertical}
+
+  /* ---------- FOOTER ---------- */
+  footer{padding:70px 0 40px;border-top:1px solid var(--line);background:#100e0c}
+  .foot{display:flex;justify-content:space-between;align-items:flex-start;gap:30px;flex-wrap:wrap}
+  .foot .mark{width:160px;height:50px;
+    -webkit-mask:url(novavie-assets/logo-light.svg) left center/contain no-repeat;
+    mask:url(novavie-assets/logo-light.svg) left center/contain no-repeat;background:var(--cream)}
+  .foot small{color:var(--muted);font-size:.82rem;line-height:1.8;display:block}
+  .foot a:hover{color:var(--gold)}
+
+  @media(max-width:980px){
+    .svc-grid,.steps,.why-grid{grid-template-columns:repeat(2,1fr)}
+    .pf-grid{grid-template-columns:repeat(2,1fr)}
+    .exp,.cta-grid{grid-template-columns:1fr}
+    .exp:nth-child(even) .exp-txt{order:0}
+    .exp-txt{padding:54px 32px}
+    .navlinks{display:none} .menu-toggle{display:block}
+    .hero-char{opacity:.35;width:80vw}
+  }
+  @media(max-width:560px){
+    .svc-grid,.steps,.pf-grid,.why-grid{grid-template-columns:1fr}
+    .frow{grid-template-columns:1fr}
+    .why-item:nth-child(odd){border-right:0}
+  }
+</style>
+</head>
+<body>
+<header id="hdr">
+  <div class="wrap"><nav>
+    <a class="brand" href="#"><span class="mark" aria-label="Constructions NovaVie"></span></a>
+    <div class="navlinks">
+      <a href="#services">Services</a>
+      <a href="#realisations">Réalisations</a>
+      <a href="#accompagnement">L'accompagnement</a>
+      <a href="#contact">Contact</a>
+      <a href="#contact" class="btn">Réservez une rencontre</a>
+    </div>
+    <button class="menu-toggle" aria-label="Menu">☰</button>
+  </nav></div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="glow"></div>
+  <span class="hero-char" aria-hidden="true"></span>
+  <div class="wrap hero-inner">
+    <span class="eyebrow">Rénovation résidentielle · Cantons-de-l'Est</span>
+    <h1>L'endroit où votre vie <em>prend forme.</em></h1>
+    <p>Cuisines, salles de bain, sous-sols — clé en main. Des plans à la dernière plinthe, on vous accompagne main dans la main.</p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn">Réservez une rencontre</a>
+      <a href="#realisations" class="btn btn--ghost">Voir nos réalisations</a>
+    </div>
+  </div>
+  <div class="scrollcue">Défilez<span></span></div>
+</section>
+
+<!-- MANIFESTE -->
+<section class="manifeste"><div class="wrap reveal">
+  <span class="eyebrow">Le manifeste</span>
+  <p>Une rénovation, ce n'est pas un chantier. C'est le <b>premier café</b> dans une cuisine qui vous ressemble. C'est le <b>bain chaud</b> après une longue journée. C'est la pièce préférée de la famille, <b>enfin terminée.</b> Nous, on s'occupe de tout le reste.</p>
+</div></section>
+
+<!-- SERVICES -->
+<section class="section" id="services"><div class="wrap">
+  <div class="sec-head reveal">
+    <span class="eyebrow">Ce qu'on réalise</span>
+    <h2>Un seul interlocuteur, du plan à la finition.</h2>
+    <p>De la démolition à la dernière plinthe — on couvre chaque étape de votre projet résidentiel.</p>
+  </div>
+  <div class="svc-grid reveal">
+    <div class="svc"><svg viewBox="0 0 24 24"><path d="M5 3v7a3 3 0 0 0 6 0V3M8 3v18M19 3c-1.5 0-2.5 1.5-2.5 4v5H19V3zM16.5 12V21"/></svg><div><h3>Cuisine</h3><small>Conception, armoires, comptoirs, électroménagers.</small></div></div>
+    <div class="svc"><svg viewBox="0 0 24 24"><path d="M5 12V6a2 2 0 0 1 2-2h2M5 12h15a1 1 0 0 1 1 1c0 4-3 7-8.5 7S4 17 4 13a1 1 0 0 1 1-1zM9 4v2"/></svg><div><h3>Salle de bain</h3><small>Douches, céramique, vanités, ambiance spa.</small></div></div>
+    <div class="svc"><svg viewBox="0 0 24 24"><path d="M12 3 2 8l10 5 10-5-10-5zM2 13l10 5 10-5M2 18l10 5 10-5"/></svg><div><h3>Planchers & sous-planchers</h3><small>Bois, vinyle, nivellement, insonorisation.</small></div></div>
+    <div class="svc"><svg viewBox="0 0 24 24"><path d="M3 21 21 3M7 3h14v14M9 5 5 9M13 9l-4 4M17 13l-4 4"/></svg><div><h3>Plinthes & finitions</h3><small>Moulures, cadrages, finitions soignées.</small></div></div>
+    <div class="svc"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4zM12 4v16M4 12h16M16 8l2-2M16 8h.01"/></svg><div><h3>Portes & fenêtres</h3><small>Remplacement, étanchéité, isolation thermique.</small></div></div>
+    <div class="svc"><svg viewBox="0 0 24 24"><path d="M3 21v-4h4v-4h4v-4h4V5h4M3 21h18"/></svg><div><h3>Sous-sol complet</h3><small>Aménagement, salle familiale, chambre, salle d'eau.</small></div></div>
+    <div class="svc"><svg viewBox="0 0 24 24"><path d="M12 3v6m0 0-4.5 9M12 9l4.5 9M7.5 18h9M12 3a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/></svg><div><h3>Plans & conception</h3><small>Plans détaillés, 3D, permis — avant le marteau.</small></div></div>
+    <div class="svc"><svg viewBox="0 0 24 24"><path d="M2 14c2-2 4-2 5 0M9 14c2-2 4-2 5 0M16 14c2-2 4-2 5 0M5 10V7l7-4 7 4v3"/></svg><div><h3>Gestion de projet</h3><small>Un chargé de projet, un échéancier, zéro stress.</small></div></div>
+  </div>
+</div></section>
+
+<!-- ACCOMPAGNEMENT -->
+<section class="section accomp" id="accompagnement"><div class="wrap">
+  <div class="sec-head reveal">
+    <span class="eyebrow">Main dans la main</span>
+    <h2>Quatre étapes. Un seul partenaire.</h2>
+    <p>Vous n'orchestrez rien. Vous vivez le projet — on gère le chantier.</p>
+  </div>
+  <div class="steps reveal">
+    <div class="step active-line"><div class="num">01</div><h3>La rencontre</h3><p>On écoute votre vision, on visite, on comprend votre quotidien.</p></div>
+    <div class="step"><div class="num">02</div><h3>Les plans</h3><p>Conception et plans détaillés. Vous voyez votre projet avant le premier coup de marteau.</p></div>
+    <div class="step"><div class="num">03</div><h3>Le chantier</h3><p>Une équipe, un chargé de projet, zéro sous-traitant fantôme. On gère tout.</p></div>
+    <div class="step"><div class="num">04</div><h3>La première soirée</h3><p>On remet les clés d'un espace fini, propre, prêt à vivre.</p></div>
+  </div>
+  <div class="accomp-art reveal">
+    <span class="char char-planning" aria-hidden="true"></span>
+    <span class="char char-handshake" aria-hidden="true"></span>
+  </div>
+</div></section>
+
+<!-- EXPERIENCE BLOCKS -->
+<section id="experience">
+  <div class="exp reveal">
+    <div class="exp-media"><span class="char" style="-webkit-mask-image:url(novavie-assets/bricklayer.svg);mask-image:url(novavie-assets/bricklayer.svg)"></span><span class="ph">Photo cuisine — à venir</span></div>
+    <div class="exp-txt"><span class="eyebrow">La cuisine</span><h3>Le café du matin a meilleur goût dans une cuisine qui vous ressemble.</h3><p>Des armoires sur mesure à l'îlot qui devient le cœur de la maison — on conçoit l'espace autour de votre quotidien.</p></div>
+  </div>
+  <div class="exp reveal">
+    <div class="exp-media"><span class="char" style="-webkit-mask-image:url(novavie-assets/driller.svg);mask-image:url(novavie-assets/driller.svg)"></span><span class="ph">Photo salle de bain — à venir</span></div>
+    <div class="exp-txt"><span class="eyebrow">La salle de bain</span><h3>Un bain chaud, une salle de bain spa. La fin de journée que vous méritez.</h3><p>Douche à l'italienne, céramique pleine hauteur, éclairage doux. La pièce qui vous appartient.</p></div>
+  </div>
+  <div class="exp reveal">
+    <div class="exp-media"><span class="char" style="-webkit-mask-image:url(novavie-assets/team.svg);mask-image:url(novavie-assets/team.svg)"></span><span class="ph">Photo sous-sol — à venir</span></div>
+    <div class="exp-txt"><span class="eyebrow">Le sous-sol</span><h3>La pièce préférée de la famille était cachée sous vos pieds.</h3><p>Salle familiale, cinéma maison, chambre d'amis, bureau — on transforme l'espace oublié en pièce maîtresse.</p></div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section class="section" id="realisations"><div class="wrap">
+  <div class="sec-head reveal">
+    <span class="eyebrow">Réalisations</span>
+    <h2>Avant. Après. Chez vous.</h2>
+    <p>Des projets de finition résidentielle partout dans les Cantons-de-l'Est.</p>
+  </div>
+  <div class="pf-grid reveal">
+    <!-- PHOTO: remplacer .ph par une <img>/background-image du projet réel -->
+    <div class="pf"><span class="tag">Cuisine</span><span class="ph">Photo projet — à venir</span><span class="loc">Magog</span></div>
+    <div class="pf"><span class="tag">Salle de bain</span><span class="ph">Photo projet — à venir</span><span class="loc">Sherbrooke</span></div>
+    <div class="pf"><span class="tag">Sous-sol</span><span class="ph">Photo projet — à venir</span><span class="loc">Bromont</span></div>
+    <div class="pf"><span class="tag">Planchers</span><span class="ph">Photo projet — à venir</span><span class="loc">Orford</span></div>
+    <div class="pf"><span class="tag">Cuisine</span><span class="ph">Photo projet — à venir</span><span class="loc">North Hatley</span></div>
+    <div class="pf"><span class="tag">Sous-sol</span><span class="ph">Photo projet — à venir</span><span class="loc">Granby</span></div>
+  </div>
+  <p class="pf-note reveal">↳ Envoyez vos photos avant/après — chaque cadre se remplace en une ligne.</p>
+</div></section>
+
+<!-- WHY -->
+<section class="section why"><div class="wrap">
+  <div class="sec-head reveal">
+    <span class="eyebrow">Pourquoi NovaVie</span>
+    <h2>La tranquillité d'esprit, incluse.</h2>
+  </div>
+  <div class="why-grid reveal">
+    <div class="why-item"><span class="n">01</span><h3>Un seul interlocuteur</h3><p>Des plans à la finition. Vous nous parlez à nous — pas à cinq sous-traitants.</p></div>
+    <div class="why-item"><span class="n">02</span><h3>Budget transparent</h3><p>Échéancier clair, prix défini d'avance. Pas de surprises en cours de route.</p></div>
+    <div class="why-item"><span class="n">03</span><h3>Finition soignée</h3><p>On est jugés sur la dernière plinthe, pas sur la première démolition.</p></div>
+    <div class="why-item"><span class="n">04</span><h3>Ancrés en Estrie</h3><p>Une équipe locale des Cantons-de-l'Est qui connaît vos maisons et votre région.</p></div>
+  </div>
+</div></section>
+
+<!-- QUOTE -->
+<section class="quote"><div class="wrap reveal">
+  <blockquote>« NovaVie a transformé notre sous-sol en l'espace préféré de la maison. Du premier croquis à la dernière plinthe, on s'est sentis accompagnés. »</blockquote>
+  <cite>Famille à Magog · témoignage à venir</cite>
+</div></section>
+
+<!-- CTA / CONTACT -->
+<section class="section cta" id="contact"><div class="wrap">
+  <div class="cta-grid">
+    <div class="reveal">
+      <span class="eyebrow">On commence ?</span>
+      <h2>Parlons de votre projet.</h2>
+      <p>Rencontre sans engagement, partout dans les Cantons-de-l'Est. On écoute, on conseille, on chiffre — sans pression.</p>
+    </div>
+    <form class="reveal" onsubmit="return false">
+      <div class="frow"><input type="text" placeholder="Nom"><input type="tel" placeholder="Téléphone"></div>
+      <input type="email" placeholder="Courriel">
+      <select><option>Type de projet…</option><option>Cuisine</option><option>Salle de bain</option><option>Sous-sol</option><option>Planchers</option><option>Autre</option></select>
+      <textarea placeholder="Parlez-nous de votre projet"></textarea>
+      <button class="btn" type="submit">Réservez une rencontre</button>
+    </form>
+  </div>
+</div></section>
+
+<!-- FOOTER -->
+<footer><div class="wrap foot">
+  <div><span class="mark"></span><small style="margin-top:16px">Rénovation résidentielle clé en main<br>Cantons-de-l'Est, Québec</small></div>
+  <div><small><b style="color:var(--sand)">Navigation</b><br><a href="#services">Services</a><br><a href="#realisations">Réalisations</a><br><a href="#accompagnement">L'accompagnement</a></small></div>
+  <div><small><b style="color:var(--sand)">Contact</b><br>info@novavie.ca <span style="opacity:.5">(à venir)</span><br>819 000-0000 <span style="opacity:.5">(à venir)</span><br>RBQ : à venir</small></div>
+  <div><small>© 2026 Constructions NovaVie Inc.<br>Tous droits réservés.</small></div>
+</div></footer>
+
+<script>
+  const hdr=document.getElementById('hdr');
+  addEventListener('scroll',()=>hdr.classList.toggle('scrolled',scrollY>40));
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.14});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
